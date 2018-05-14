@@ -63,6 +63,11 @@ body {
 	grid-column: 2 / -2;
 }
 
+.cellSpan {
+	padding: 0 20px;
+	grid-column: 2 / -2;
+}
+
 @media only screen and (min-width: 1000px) {
 	.cell {
 		grid-column-start: auto;
@@ -114,7 +119,10 @@ body {
 
 
 
-
+.subtitle {
+	padding: 0 calc(18% + 20px);
+	padding-top: 50px;
+}
 
 
 

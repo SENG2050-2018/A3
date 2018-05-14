@@ -9,16 +9,19 @@
 		
 
 	</head>
-	<body onresize="resize()">
+	<body>
 		<div class='flex-container'>
+			<!-- Top navigation bar -->
 			<div class='flex-row'>
 				<ul class='links inlineList rAlign'>
-					<li>Notices</li>
-					<li>Knowledge</li>
-					<li>My Activity</li>
-					<li>users name</li>
+					<li><a>Notices</a></li>
+					<li><a>Knowledge</a></li>
+					<li><a>My Activity</a></li>
+					<li><a>users name</a></li>
 				</ul>
 			</div>
+			
+			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
 				<div class='titleWrapper'>
 					<h1 class='pageTitle'><span style='color:white'>IT</span> SERVICES</h1>
@@ -29,6 +32,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Extra navigational links -->
 			<div class='flex-row'>
 				<ul class='grid links'>
 					<li class='cell offset'>
@@ -44,9 +49,15 @@
 						</a>
 					</li>
 				</ul>
-				<c:forEach begin="0" end="10" varStatus="loop">
-					Index: ${loop.index}<br/>
-				</c:forEach>
+				
+				<!-- Display for maintenance alerts, etc, set by system administrators -->
+				<h1 class='subtitle'>Alerts</h1>
+				<ul class='alerts grid links'>
+					<li class='cellSpan'>
+						<h2>Example - Scheduled Maintenance</h2>
+						<p>Scheduled for now. click to see more details etc etc..</p>
+					</li>
+				</ul>
 			</div>
 		</div>
 		
