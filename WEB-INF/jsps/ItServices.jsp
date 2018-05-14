@@ -2,6 +2,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
+	<!-- testing etc -->
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
