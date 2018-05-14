@@ -1,0 +1,125 @@
+:root {
+	--pageTitle:56px;
+	--stdFont:18px;
+}
+
+body {
+	margin: 0;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+	.flex-container > .flex-row {
+		width:100%;
+	}
+
+
+.titleWrapper {
+	padding: 0 18%;
+	height: 340px;
+	background-image:url("../images/Technology.PNG");
+	background-size: cover;
+	background-position: center center;
+}
+
+	.titleWrapper > .pageTitle {
+		color: #1090D5;
+		font-size: var(--pageTitle);
+		margin: 0;
+		padding-top: 120px;
+	}
+
+.searchBox, .searchBtn{
+	background-color: white;
+	font-size: var(--stdFont);
+	vertical-align: top;
+}
+
+.searchBox {
+	width: calc(100% - 90px);
+	padding: 12px 16px;
+	border: none;
+	border-radius: 6px 0 0 6px;
+}
+
+.searchBtn {
+	padding: 12px 12px;
+	border: none;
+	border-left: solid 1px #D3D3D3;
+	border-radius: 0 6px 6px 0;
+	background-color: white;
+}
+
+
+
+
+.grid {
+	display: grid;
+	grid-template-columns: calc(18% - 20px) repeat(6, 1fr) calc(18% - 20px);
+	grid-gap: 20px;
+}
+.cell {
+	grid-column-end: span 2;
+}
+.offset {
+	grid-column-start: 2;
+}
+
+
+.links {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.inlineList > li {
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 10px;
+	font-size: var(--stdFont);
+}
+
+.rAlign {
+	float: right;
+}
+
+.mimicBtn {
+	display: inline-block;
+	width: 100%;
+	text-decoration: none;
+	background-color: #1090D5;
+	border-radius: 6px;
+}
+	.mimicBtn > * {
+		padding: 0 20px;
+		color: white;
+	}
+	
+	.mimicBtn > h2 {
+		font-size: 32px;
+	}
+	
+	.mimicBtn > p {
+		font-size: var(--stdFont);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
