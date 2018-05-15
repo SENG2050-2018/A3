@@ -22,23 +22,23 @@
   version="4.0"
   metadata-complete="true">
   <servlet>
-	<servlet-name>Main</servlet-name>
+	<servlet-name>FrontController</servlet-name>
 	<servlet-class>FrontController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-	<servlet-name>Main</servlet-name>
+	<servlet-name>FrontController</servlet-name>
 	<url-pattern>/IssueReporting</url-pattern>
   </servlet-mapping>
 
   <servlet>
-	<servlet-name>Index</servlet-name>
-	<servlet-class>Index</servlet-class>
+	<servlet-name>ReportIssue</servlet-name>
+	<servlet-class>ReportIssueController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-	<servlet-name>Index</servlet-name>
-	<url-pattern>/Index</url-pattern>
+	<servlet-name>ReportIssue</servlet-name>
+	<url-pattern>/ReportIssue</url-pattern>
   </servlet-mapping>
 
 </web-app>

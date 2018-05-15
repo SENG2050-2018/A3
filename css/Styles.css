@@ -1,12 +1,18 @@
+/* Common variables */
 :root {
-	--pageTitle:56px;
+	--blue: #1090D5;
+	--light-grey: #D3D3D3;
+	--pageTitle:36px;
+	--title: 56px;
 	--stdFont:18px;
 }
-
+/* Removes standard margin */
 body {
 	margin: 0;
 }
 
+/*============================================= Styling for Mobile =============================================*/
+/* Creates a flexbox columnar layout */
 .flex-container {
 	display: flex;
 	flex-direction: column;
@@ -16,22 +22,31 @@ body {
 		width:100%;
 	}
 
-
+/* Wrapper div element for the page title, styled to have the background image */
 .titleWrapper {
-	padding: 0 18%;
-	height: 340px;
+	padding: 0 5%;
+	height: 300px;
 	background-image:url("../images/Technology.PNG");
 	background-size: cover;
 	background-position: center center;
 }
-
+	/* Styling for the page title text */
 	.titleWrapper > .pageTitle {
-		color: #1090D5;
-		font-size: var(--pageTitle);
+		color: var(--blue);
+		font-size: var(--title);
 		margin: 0;
-		padding-top: 120px;
+		padding-top: 80px;
+		background: linear-gradient(to bottom left, white 35%, var(--blue) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
+.pageTitle > span {
+	-webkit-background-clip: content-box;
+	-webkit-text-fill-color: initial;
+}
+
+/* Styling regarding the look and placement of the search bar and search button */
 .searchBox, .searchBtn{
 	background-color: white;
 	font-size: var(--stdFont);
@@ -48,36 +63,27 @@ body {
 .searchBtn {
 	padding: 12px 12px;
 	border: none;
-	border-left: solid 1px #D3D3D3;
+	border-left: solid 1px var(--light-grey);
 	border-radius: 0 6px 6px 0;
 	background-color: white;
 }
 
+/* CSS3 grid */
 .grid {
 	display: grid;
-	grid-template-columns: calc(18% - 20px) repeat(6, 1fr) calc(18% - 20px);
+	grid-template-columns: calc(5% - 20px) repeat(6, 1fr) calc(5% - 20px);
 	grid-gap: 20px;
 }
-
+/* Standard cell in a css grid, styled to fill all but the first and last column in the grid */
 .cell {
 	grid-column: 2 / -2;
 }
 
+/* span all cell in a css grid, styled to fill all but the first and last column in the grid */
 .cellSpan {
 	padding: 0 20px;
 	grid-column: 2 / -2;
 }
-
-@media only screen and (min-width: 1000px) {
-	.cell {
-		grid-column-start: auto;
-		grid-column-end: span 3;
-	}
-	.offset {
-		grid-column-start: 2;
-	}
-}
-
 
 
 
@@ -86,22 +92,28 @@ body {
 	padding-left: 0;
 }
 
-.inlineList > li {
+.inlineList > .allScreens {
 	display: inline-block;
 	font-weight: bold;
 	margin: 0 10px;
 	font-size: var(--stdFont);
 }
 
+.largeScreenOnly {
+	display: none;
+}
+
+
 .rAlign {
 	float: right;
 }
 
+/* Styling for anchor tags to mimic html button elements */
 .mimicBtn {
 	display: inline-block;
 	width: 100%;
 	text-decoration: none;
-	background-color: #1090D5;
+	background-color: var(--blue);
 	border-radius: 6px;
 }
 	.mimicBtn > * {
@@ -118,23 +130,120 @@ body {
 	}
 
 
-
 .subtitle {
-	padding: 0 calc(18% + 20px);
+	padding: 0 calc(5% + 20px);
 	padding-top: 50px;
 }
 
+/* Styling to create a centered form element in the middle of the page */
+.centeredForm {
+	margin: 0 5%;
+	border: solid 1px var(--light-grey);
+	border-radius: 6px;
+}
+	.centeredForm > * {
+		padding: 0 20px;
+	}
+
+/* Simple class to change text colour to red */
+.red {
+	color: red;
+}
+
+/* Section styling to provide seperation of elements through padding and margins */	
+section {
+	margin-top: 20px;
+	border-bottom: solid 1px var(--light-grey);
+}
+
+section > label, section > p {
+	font-size: var(--stdFont);
+}
+
+section > input, section > textarea {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	border: solid 1px #777777;
+	margin-top: 5px;
+	width: 100%;
+	font-size: var(--stdFont);
+	margin-bottom: 20px;
+}
+
+/* Smaller text in a grey font */
+.small {
+	color: #777777;
+	font-size: 15px;
+	margin: 0 0 15px 0;
+}
+
+.title > h1 {
+	font-size: var(--pageTitle);
+	margin: 15px 0;
+}
+
+.spacing {
+	height: 5px;
+	background: #2D3138;
+}
 
 
-
-
-
-
-
-
-
-
-
-
+/* ============================================= Styling for Desktop and Tablet ============================================= */
+@media only screen and (min-width: 1000px) {
+	.cell {
+		grid-column-start: auto;
+		grid-column-end: span 3;
+	}
+	.offset {
+		grid-column-start: 2;
+	}
+	
+	section > input {
+		width: 100%;
+	}
+	
+	.titleWrapper {
+		padding: 0 18%;
+		height: 340px;
+		background-image:url("../images/Technology.PNG");
+		background-size: cover;
+		background-position: center center;
+	}
+		.titleWrapper > .pageTitle {
+			-webkit-background-clip: content-box;
+			-webkit-text-fill-color: initial;
+			color: var(--blue);
+			font-size: var(--title);
+			margin: 0;
+			padding-top: 80px;
+			background: none;
+			
+		}
+	
+	.grid {
+		display: grid;
+		grid-template-columns: calc(18% - 20px) repeat(6, 1fr) calc(18% - 20px);
+		grid-gap: 20px;
+	}
+	
+	.subtitle {
+		padding: 0 calc(18% + 20px);
+		padding-top: 50px;
+	}
+	
+	.centeredForm {
+		margin: 0 18%;
+		border: solid 1px var(--light-grey);
+		border-radius: 6px;
+	}
+	
+	.largeScreenOnly {
+		display: inline-block;
+		font-weight: bold;
+		margin: 0 10px;
+		font-size: var(--stdFont);
+	}
+}
 
 

@@ -4,6 +4,7 @@
 	<head>
 		<title>IT Services</title>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
@@ -12,14 +13,7 @@
 	<body>
 		<div class='flex-container'>
 			<!-- Top navigation bar -->
-			<div class='flex-row'>
-				<ul class='links inlineList rAlign'>
-					<li><a>Notices</a></li>
-					<li><a>Knowledge</a></li>
-					<li><a>My Activity</a></li>
-					<li><a>users name</a></li>
-				</ul>
-			</div>
+			<jsp:include page="Header.jsp" />
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
@@ -43,7 +37,7 @@
 						</a>
 					</li>
 					<li class='cell'>
-						<a href="#" class='mimicBtn'>
+						<a href="<%=request.getContextPath()%>/ReportIssue" class='mimicBtn'>
 							<h2>Report an Issue</h2>
 							<p>Experiencing a problem&#63; Report it here</p>
 						</a>
