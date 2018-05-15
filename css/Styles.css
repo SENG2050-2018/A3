@@ -9,6 +9,7 @@
 /* Removes standard margin */
 body {
 	margin: 0;
+	color: #2D3138;
 }
 
 /*============================================= Styling for Mobile =============================================*/
@@ -205,6 +206,10 @@ section > textarea {
 	text-decoration: none;
 	font-weight: bold;
 }
+.spaced > a:hover {
+	color: black;
+}
+
 
 /* ============================================= Styling for Desktop and Tablet ============================================= */
 @media only screen and (min-width: 1000px) {
