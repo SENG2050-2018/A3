@@ -37,7 +37,7 @@
 						</a>
 					</li>
 					<li class='cell'>
-						<a href="<%=request.getContextPath()%>/ReportIssue" class='mimicBtn'>
+						<a href="<%=request.getContextPath()%>/itservices/report_issue" class='mimicBtn'>
 							<h2>Report an Issue</h2>
 							<p>Experiencing a problem&#63; Report it here</p>
 						</a>

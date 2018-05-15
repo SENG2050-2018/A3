@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<title>IT Services</title>
@@ -14,9 +15,12 @@
 		<div class='flex-container'>
 			<!-- Top navigation bar -->
 			<jsp:include page="Header.jsp" />
+			
 			<div class='flex-row spacing'></div>
+			<jsp:include page="urlConstructor.jsp" />
+			
 			<div class='flex-row'>
-				<form class='centeredForm' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'> <!-- Title -->
 						<h1>Report Issue</h1>
 						<p class='small'>Experiencing a problem? Report it here</p>

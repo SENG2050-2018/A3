@@ -136,15 +136,19 @@ body {
 }
 
 /* Styling to create a centered form element in the middle of the page */
-.centeredForm {
+.centered{
 	margin: 0 5%;
+}
+	.centered > * {
+		padding: 0 20px;
+		font-size: var(--stdFont);
+	}
+
+.form {
 	border: solid 1px var(--light-grey);
 	border-radius: 6px;
 }
-	.centeredForm > * {
-		padding: 0 20px;
-	}
-
+	
 /* Simple class to change text colour to red */
 .red {
 	color: red;
@@ -171,6 +175,10 @@ section > input, section > textarea {
 	margin-bottom: 20px;
 }
 
+section > textarea {
+	height: 100px;
+}
+
 /* Smaller text in a grey font */
 .small {
 	color: #777777;
@@ -188,6 +196,15 @@ section > input, section > textarea {
 	background: #2D3138;
 }
 
+.spaced {
+	padding: 15px 0;
+}
+
+.spaced > a, .spaced > a:visited {
+	color: #2D3138;
+	text-decoration: none;
+	font-weight: bold;
+}
 
 /* ============================================= Styling for Desktop and Tablet ============================================= */
 @media only screen and (min-width: 1000px) {
@@ -232,17 +249,22 @@ section > input, section > textarea {
 		padding-top: 50px;
 	}
 	
-	.centeredForm {
+	.centered{
 		margin: 0 18%;
-		border: solid 1px var(--light-grey);
-		border-radius: 6px;
 	}
+
 	
 	.largeScreenOnly {
 		display: inline-block;
 		font-weight: bold;
 		margin: 0 10px;
 		font-size: var(--stdFont);
+	}
+	
+	.small {
+		color: #777777;
+		font-size: 18px;
+		margin: 0 0 15px 0;
 	}
 }
 
