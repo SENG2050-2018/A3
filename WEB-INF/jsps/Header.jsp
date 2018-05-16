@@ -20,9 +20,7 @@
 		</div>
 		<a href="#" class='largeScreenOnly'>Knowledge</a>
 		<div class='dropdown'>
-			<button class='dropBtn'> Notices
-				<span class='fa fa-caret-down'></span>
-			</button>
+			<button class='dropBtn'> Notices</button>
 			<div class="dropdown-content">
 				<a href="#">dynamic creation</a>
 				<a href="#">dynamic creation</a>
