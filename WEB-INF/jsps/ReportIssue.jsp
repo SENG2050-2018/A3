@@ -5,7 +5,7 @@
 	<head>
 		<title>IT Services</title>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="initial-scale=1">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
@@ -41,11 +41,24 @@
 						<label for='title'><span class='red'>*</span>Briefly describe your issue</label>
 						<input name='title' type='text' required>
 						
-						<label for='description'><span class='red'>*</span>Please describe your issue in detail</label>
+						<p><span class='rdoText'><span class='red'>*</span> I am able to access internal websites:</span>
+						<input type="radio" name="internal" value="yes" id='int-yes'><label for='int-yes'>Yes</label>
+						<input type="radio" name="internal" value="no" id='int-no'><label for='int-no'>No</label>
+						</p>
+						<p><span class='rdoText'><span class='red'>*</span> I have tried using an alternate browser:</span>
+						<input type="radio" name="altBrowser" value="yes" id='alt-yes'><label for='alt-yes'>Yes</label>
+						<input type="radio" name="altBrowser" value="no" id='alt-no'><label for='alt-no'>No</label>
+						</p>
+						<p><span class='rdoText'><span class='red'>*</span> I have tried restarting my computer:</span>
+						<input type="radio" name="pcRestart" value="yes" id='res-yes'><label for='res-yes'>Yes</label>
+						<input type="radio" name="pcRestart" value="no" id='res-no'><label for='res-no'>No</label>
+						</p>
+						
+						<label for='description' class='setWidth' style='padding-top: 15px;'><span class='red'>*</span>Please describe your issue in detail</label>
 						<textarea name='description' required></textarea>
 					</section>
-					
-					<section> <!-- Non required additional data -->
+					<!--
+					<section> <!-- Non required additional data 
 						<h2>Additonal Information</h2>
 						<h3>My Location</h3>
 						<p>
@@ -66,7 +79,7 @@
 							<input name='room' type='text'>
 						</p>
 					</section>
-					
+					-->
 					<button type='reset'>Clear</button>
 					<button type='submit'>Submit</button>
 					

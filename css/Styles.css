@@ -9,6 +9,7 @@
 /* Removes standard margin */
 body {
 	margin: 0;
+	overflow-x:hidden;
 	color: #2D3138;
 }
 
@@ -138,7 +139,8 @@ body {
 
 /* Styling to create a centered form element in the middle of the page */
 .centered{
-	margin: 0 5%;
+	
+	
 }
 	.centered > * {
 		padding: 0 20px;
@@ -165,7 +167,7 @@ section > label, section > p {
 	font-size: var(--stdFont);
 }
 
-section > input, section > textarea {
+section > input[type='text'], section > textarea {
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -210,6 +212,10 @@ section > textarea {
 	color: black;
 }
 
+.rdoText {
+	display: inline-block;
+	width: 300px;
+}
 
 /* ============================================= Styling for Desktop and Tablet ============================================= */
 @media only screen and (min-width: 1000px) {
@@ -221,7 +227,7 @@ section > textarea {
 		grid-column-start: 2;
 	}
 	
-	section > input {
+	section > input[type='text'] {
 		width: 100%;
 	}
 	

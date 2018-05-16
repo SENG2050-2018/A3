@@ -8,7 +8,7 @@
 		provides a dynamic representation of the current context and provides links to previous parent pages
 -->
 
-<div class='flex-row centered spaced'>
+<div class='centered spaced' >
 	<!--
 	<c:forTokens items="${requestScope['javax.servlet.forward.request_uri']}" delims="/?" var="part" varStatus='status'>
 		<c:choose>
