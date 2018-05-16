@@ -8,10 +8,27 @@
 -->
 
 <div class='flex-row'>
-	<ul class='links inlineList rAlign'>
-		<li class='largeScreenOnly'><a>Notices</a></li>
-		<li class='largeScreenOnly'><a>Knowledge</a></li>
-		<li class='allScreens'><a>My Activity</a></li>
-		<li class='allScreens'><a>users name</a></li>
-	</ul>
+	<div class='navBar'>
+		<div class='dropdown'>
+			<button class='dropBtn'> Users name
+				<span class='fa fa-caret-down'></span>
+			</button>
+			<div class="dropdown-content" style='right:0'>
+				<a href="#">Profile</a>
+				<a href="#">Logout</a>
+			</div>
+		</div>
+		<a href="#" class='largeScreenOnly'>Knowledge</a>
+		<div class='dropdown'>
+			<button class='dropBtn'> Notices
+				<span class='fa fa-caret-down'></span>
+			</button>
+			<div class="dropdown-content">
+				<a href="#">dynamic creation</a>
+				<a href="#">dynamic creation</a>
+			</div>
+		</div>
+		
+		
+	</div>
 </div>

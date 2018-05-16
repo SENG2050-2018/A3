@@ -36,50 +36,29 @@
 					</section>
 					
 					<section> <!-- required data -->
-						<input name='userID' type='hidden' text='usersId'>
+						<input name='userID' type='hidden' text='usersId'>													<!-- reporter -->
 						
-						<label for='title'><span class='red'>*</span>Briefly describe your issue</label>
+						<label for='title'><span class='red'>*</span>Briefly describe your issue</label>					<!-- title -->
 						<input name='title' type='text' required>
 						
-						<p><span class='rdoText'><span class='red'>*</span> I am able to access internal websites:</span>
+						<p><span class='rdoText'><span class='red'>*</span> I am able to access internal websites:</span>	<!-- extra info -->
 						<input type="radio" name="internal" value="yes" id='int-yes'><label for='int-yes'>Yes</label>
 						<input type="radio" name="internal" value="no" id='int-no'><label for='int-no'>No</label>
 						</p>
-						<p><span class='rdoText'><span class='red'>*</span> I have tried using an alternate browser:</span>
+						<p><span class='rdoText'><span class='red'>*</span> I have tried using an alternate browser:</span>	<!-- extra info -->
 						<input type="radio" name="altBrowser" value="yes" id='alt-yes'><label for='alt-yes'>Yes</label>
 						<input type="radio" name="altBrowser" value="no" id='alt-no'><label for='alt-no'>No</label>
 						</p>
-						<p><span class='rdoText'><span class='red'>*</span> I have tried restarting my computer:</span>
+						<p><span class='rdoText'><span class='red'>*</span> I have tried restarting my computer:</span>		<!-- extra info -->
 						<input type="radio" name="pcRestart" value="yes" id='res-yes'><label for='res-yes'>Yes</label>
 						<input type="radio" name="pcRestart" value="no" id='res-no'><label for='res-no'>No</label>
 						</p>
 						
-						<label for='description' class='setWidth' style='padding-top: 15px;'><span class='red'>*</span>Please describe your issue in detail</label>
+						<label for='description' class='setWidth' style='padding-top: 15px;'>
+							<span class='red'>*</span>Please describe your issue in detail</label> 							<!-- Description -->
 						<textarea name='description' required></textarea>
 					</section>
-					<!--
-					<section> <!-- Non required additional data 
-						<h2>Additonal Information</h2>
-						<h3>My Location</h3>
-						<p>
-							<label for='building'>Building: </label>
-							<select name='building'>
-								<option value='default' selected disabled>--</option>
-								<option value='CT'>CT Building</option>
-								<option value='A'>Auchmuty Library</option>
-								<option value='GP'>GP Building</option>
-								<option value='HC'>Huxley Library</option>
-								<option value='SSH'>Shortland Student Hub</option>
-								<option value='HSH'>Hunter Student Hub (Student Services Building)</option>
-								<option value='other'>Other</option>
-							</select>
-						</p>
-						<p>
-							<label for='room'>Room: </label>
-							<input name='room' type='text'>
-						</p>
-					</section>
-					-->
+					
 					<button type='reset'>Clear</button>
 					<button type='submit'>Submit</button>
 					

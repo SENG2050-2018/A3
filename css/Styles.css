@@ -94,20 +94,8 @@ body {
 	padding-left: 0;
 }
 
-.inlineList > .allScreens {
-	display: inline-block;
-	font-weight: bold;
-	margin: 0 10px;
-	font-size: var(--stdFont);
-}
-
 .largeScreenOnly {
 	display: none;
-}
-
-
-.rAlign {
-	float: right;
 }
 
 /* Styling for anchor tags to mimic html button elements */
@@ -217,6 +205,81 @@ section > textarea {
 	width: 300px;
 }
 
+
+
+
+
+
+
+
+
+/** copied from w3schools tutorials */
+.navBar {
+    overflow: hidden;
+}
+
+.navBar a {
+	color: #2D3138;
+    float: right;
+    font-size: var(--stdFont);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navBar a:visited {
+	color: #2D3138;
+}
+
+.dropdown {
+    float: right;
+	display:inline-block;
+}
+
+.dropdown .dropBtn {
+	color: #2D3138;
+    font-size: var(--stdFont);    
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navBar a:hover, .dropdown:hover .dropBtn {
+    color: #7F838A;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #2D3138;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+
 /* ============================================= Styling for Desktop and Tablet ============================================= */
 @media only screen and (min-width: 1000px) {
 	.cell {
@@ -266,10 +329,7 @@ section > textarea {
 
 	
 	.largeScreenOnly {
-		display: inline-block;
-		font-weight: bold;
-		margin: 0 10px;
-		font-size: var(--stdFont);
+		display: block;
 	}
 	
 	.small {
