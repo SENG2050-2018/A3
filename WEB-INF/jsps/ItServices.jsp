@@ -8,6 +8,59 @@
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
+		<script>
+		/** Closure function
+		SETS lastClick IF setLastClick(x) call
+		RETURNS lastClick IF setLastClick() call
+		*/
+		var setLastClick = (function (x){
+			lastClick = -1;
+			return function (x)
+			{
+				if (x === undefined){
+					return lastClick; 
+				}
+				else {
+					return lastClick = x;
+				}
+			};
+		})();
+		var set2ndLastClick = (function (x){
+			secondlastClick = -2;
+			return function (x)
+			{
+				if (x === undefined){
+					return secondlastClick; 
+				}
+				else {
+					return secondlastClick = x;
+				}
+			};
+		})();
+		
+		/**
+		For mobile support to assist with collapsing drop-down menus
+		*/
+		function closeDropDown(x){
+			if ("ontouchstart" in document.documentElement)	//if statement checks for touch device
+			{
+				if (setLastClick() != x && setLastClick() != -1){
+					document.getElementsByClassName("dropdown-content")[setLastClick()].style.display='none';
+					document.getElementsByClassName("dropdown-content")[x].style.display='block';
+				}
+				if (setLastClick() == x){
+					document.getElementsByClassName("dropdown-content")[x].style.display='none';
+					if (set2ndLastClick() == setLastClick()){
+						document.getElementsByClassName("dropdown-content")[setLastClick()].style.display='block';
+					}
+				}
+				set2ndLastClick(setLastClick())
+				setLastClick(x);
+			}
+		}
+		
+		
+		</script>
 
 	</head>
 	<body>

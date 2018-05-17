@@ -10,7 +10,7 @@
 <div class='flex-row'>
 	<div class='navBar'>
 		<div class='dropdown'>
-			<button class='dropBtn'> Users name
+			<button class='dropBtn' onclick="closeDropDown(0)"> Users name
 				<span class='fa fa-caret-down'></span>
 			</button>
 			<div class="dropdown-content" style='right:0'>
@@ -19,8 +19,8 @@
 			</div>
 		</div>
 		<a href="#" class='largeScreenOnly'>Knowledge</a>
-		<div class='dropdown'>
-			<button class='dropBtn'> Notices</button>
+		<div class='dropdown' >
+			<button class='dropBtn' onclick="closeDropDown(1)"> Notices</button>
 			<div class="dropdown-content">
 				<a href="#">dynamic creation</a>
 				<a href="#">dynamic creation</a>
