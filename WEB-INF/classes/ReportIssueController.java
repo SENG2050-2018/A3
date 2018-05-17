@@ -6,6 +6,10 @@
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
+import java.sql.*;
+import javax.sql.*;
+import javax.naming.InitialContext;
+
 
 public class ReportIssueController extends HttpServlet
 {
@@ -15,11 +19,9 @@ public class ReportIssueController extends HttpServlet
 		dispatcher.forward(request, response);
 	}
 	
-	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
+	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException, SQLException
 	{
-		/**
-			
-		*/
-	}
+
+				}
 	
 }
