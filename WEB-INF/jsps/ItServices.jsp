@@ -25,18 +25,6 @@
 				}
 			};
 		})();
-		var set2ndLastClick = (function (x){
-			secondlastClick = -2;
-			return function (x)
-			{
-				if (x === undefined){
-					return secondlastClick; 
-				}
-				else {
-					return secondlastClick = x;
-				}
-			};
-		})();
 		
 		/**
 		For mobile support to assist with collapsing drop-down menus
@@ -49,12 +37,14 @@
 					document.getElementsByClassName("dropdown-content")[x].style.display='block';
 				}
 				if (setLastClick() == x){
-					document.getElementsByClassName("dropdown-content")[x].style.display='none';
-					if (set2ndLastClick() == setLastClick()){
-						document.getElementsByClassName("dropdown-content")[setLastClick()].style.display='block';
+					
+					if (document.getElementsByClassName("dropdown-content")[x].style.display == 'block'){
+						document.getElementsByClassName("dropdown-content")[x].style.display='none';
+					}
+					else if (document.getElementsByClassName("dropdown-content")[x].style.display == 'none'){
+						document.getElementsByClassName("dropdown-content")[x].style.display='block';
 					}
 				}
-				set2ndLastClick(setLastClick())
 				setLastClick(x);
 			}
 		}
