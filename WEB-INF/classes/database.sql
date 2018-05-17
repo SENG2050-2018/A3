@@ -14,7 +14,6 @@ CREATE TABLE Person (
 	personID			int					IDENTITY(1,1)	PRIMARY KEY,
 	userName			varchar(255)		NOT NULL,
 	password			varchar(255)		NOT NULL,		--will hash + salt later
-	CONSTRAINT CHK_Access CHECK (domainAccess = 'public' OR domainAccess = 'admin')
 );
 
 CREATE TABLE UserRoles (

@@ -21,24 +21,31 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
   version="4.0"
   metadata-complete="true">
-  <servlet>
-	<servlet-name>FrontController</servlet-name>
-	<servlet-class>FrontController</servlet-class>
-  </servlet>
+    <resource-ref>
+		<description>MySQL database</description>
+		<res-ref-name>jdbc/SENG2050_2018</res-ref-name>
+		<res-type>javac.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+  
+	<servlet>
+		<servlet-name>FrontController</servlet-name>
+		<servlet-class>FrontController</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-	<servlet-name>FrontController</servlet-name>
-	<url-pattern>/itservices</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FrontController</servlet-name>
+		<url-pattern>/itservices</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-	<servlet-name>ReportIssue</servlet-name>
-	<servlet-class>ReportIssueController</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>DataAccess</servlet-name>
+		<servlet-class>DataAccess</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-	<servlet-name>ReportIssue</servlet-name>
-	<url-pattern>/itservices/report_issue</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DataAccess</servlet-name>
+		<url-pattern>/data_access</url-pattern>
+	</servlet-mapping>
 
 </web-app>
