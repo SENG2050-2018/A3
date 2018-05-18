@@ -7,6 +7,6 @@
 		maxActive="100" maxIdle="30" maxWait="10000"
 		username="c3259038" password="021297"
 		driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://134.148.4.104:3306/c3259038_db"/>
+		url="jdbc:mysql://127.0.0.1:30001/c3259038_db"/>
 
 </Context>

@@ -14,6 +14,7 @@ public class DataAccess extends HttpServlet
 
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
 	{
+		PrintWriter out = response.getWriter();
 		Context ctx = null;
 		Connection conn = null;
 		Statement stmt = null;
@@ -26,7 +27,7 @@ public class DataAccess extends HttpServlet
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT userName FROM Person");
 			while (rs.next()) {
-				System.out.println(rs.getString(1)); //gets the first column's rows.
+				out.println("<p>" + rs.getString(1) + "</p>"); //gets the first column's rows.
 			}
 		}
 		catch (NamingException e)
