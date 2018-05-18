@@ -155,7 +155,7 @@ section > label, section > p {
 	font-size: var(--stdFont);
 }
 
-section > input[type='text'], section > textarea {
+section > input[type='text'], section > textarea, section > input[type='password'] {
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -336,6 +336,10 @@ section > textarea {
 		color: #777777;
 		font-size: 18px;
 		margin: 0 0 15px 0;
+	}
+	
+	.login {
+		padding: 0 30%;
 	}
 }
 

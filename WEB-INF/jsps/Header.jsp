@@ -18,7 +18,7 @@
 				<a href="#">Logout</a>
 			</div>
 		</div>
-		<a href="#" class='largeScreenOnly'>Knowledge</a>
+		<a href="<%=request.getContextPath()%>/itservices?id=kb_search" class='largeScreenOnly'>Knowledge</a>
 		<div class='dropdown' >
 			<button class='dropBtn' onclick="closeDropDown(1)"> Notices</button>
 			<div class="dropdown-content">

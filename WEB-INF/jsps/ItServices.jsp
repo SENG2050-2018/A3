@@ -49,7 +49,6 @@
 			}
 		}
 		
-		
 		</script>
 
 	</head>
@@ -74,7 +73,7 @@
 			<div class='flex-row'>
 				<ul class='grid links'>
 					<li class='cell offset'>
-						<a href="#" class='mimicBtn'>
+						<a href="<%=request.getContextPath()%>/itservices?id=kb_search" class='mimicBtn'>
 							<h2>Search Knowledge</h2>
 							<p>Search our knowledge base and find answers</p>
 						</a>

@@ -25,7 +25,9 @@ public class DataAccess extends HttpServlet
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT userName FROM Person");
-			
+			while (rs.next()) {
+				System.out.println(rs.getString(1)); //gets the first column's rows.
+			}
 		}
 		catch (NamingException e)
 		{

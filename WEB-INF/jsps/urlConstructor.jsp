@@ -9,20 +9,6 @@
 -->
 
 <div class='centered spaced' >
-	<!--
-	<c:forTokens items="${requestScope['javax.servlet.forward.request_uri']}" delims="/?" var="part" varStatus='status'>
-		<c:choose>
-			<c:when test="${part == 'itservices'}" >
-				<a class='urlPart' href='%=request.getContextPath()%>/itservices'><c:out value="Home" /></a>
-			</c:when>
-		</c:choose>
-		<c:if test="${!((status.last) || part == 'Assignment3')}"><span class='fa fa-chevron-right'></span></c:if>
-	</c:forTokens>
-	<c:forEach items="${paramValues}" var="param" varStatus='status'>
-	
-	</c:forEach>
-	
-	-->
 	<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=itservices'><c:out value="Home" /></a>
 	
 	<c:forEach var="parameter" items="${param}" >
@@ -31,7 +17,10 @@
 				<span class='fa fa-chevron-right'></span>
 				<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=report_issue'><c:out value="Report Issue" /></a>
 			</c:when>
-		
+			<c:when test="${(parameter.key == 'id') && (parameter.value == 'kb_search')}" >
+				<span class='fa fa-chevron-right'></span>
+				<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=kb_search'><c:out value="Knowledge Base" /></a>
+			</c:when>
 		</c:choose>
 	</c:forEach>
 </div>
