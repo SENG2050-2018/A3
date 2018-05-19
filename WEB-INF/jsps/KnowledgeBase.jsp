@@ -9,6 +9,7 @@
 -->
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<title>IT Services</title>
@@ -35,11 +36,17 @@
 					</section>
 					<section>
 						<p>
-							Showing all results?
+							Showing <c:out value="${fn:length(reports)}" /> results
 						</p>
 					</section>
 					<section>
-					
+						<c:forEach var='report' items='${reports}'>
+							<p>
+								<c:out value="${report.title}" /> <br>
+								<c:out value="${report.reporter}" /> <br>
+								<c:out value="${report.description}" />
+							</p>
+						</c:forEach>
 					</section>
 				</form>
 			</div>

@@ -1,20 +1,19 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
+
 
 import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 import java.util.*;
 import java.io.Serializable;
+import beans.Report;
 
-public class DataAccess extends HttpServlet
+public class DataAccess 
 {
-	
-
-	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
+	public List<Report> getAllIssueReports()
 	{
-		PrintWriter out = response.getWriter();
+		String query = "SELECT * FROM V_KnowledgeBase";
+		List<Report> reports = new LinkedList<>();
+		
 		Context ctx = null;
 		Connection conn = null;
 		Statement stmt = null;
@@ -25,10 +24,18 @@ public class DataAccess extends HttpServlet
 			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT userName FROM Person");
-			while (rs.next()) {
-				out.println("<p>" + rs.getString(1) + "</p>"); //gets the first column's rows.
+			rs = stmt.executeQuery(query);
+			System.out.println("query executed");
+			while (rs.next())
+			{
+				Report rep = new Report();
+				rep.setTitle(rs.getString(1));
+				rep.setDescription(rs.getString(4));
+				rep.setReporter(rs.getString(2));
+				reports.add(rep);
 			}
+			
+			
 		}
 		catch (NamingException e)
 		{
@@ -45,6 +52,7 @@ public class DataAccess extends HttpServlet
 				stmt.close();
 				conn.close();
 				ctx.close();
+				return reports;
 			}
 			catch (NamingException e)
 			{
@@ -58,6 +66,7 @@ public class DataAccess extends HttpServlet
 			{
 				e.printStackTrace();
 			}
+			return null;
 		}
 	}
 }
