@@ -22,17 +22,17 @@
 	<body>
 		<div class='flex-container'>
 			<div class='flex-row'>
-				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<form class='centered form' action='j_security_check' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
 						<h1>IT Services Login</h1>
 					</section>
 					<div class='login'>
 						<section>
-							<label for='username'>Username: </label>
-							<input name='username' type='text'>
+							<label for='j_username'>Username: </label>
+							<input name='j_username' type='text'>
 							
-							<label for='password'>Password: </label>
-							<input name='password' type='password'>
+							<label for='j_password'>Password: </label>
+							<input name='j_password' type='password'>
 							<button type='submit'>Login</button>
 						</section>
 					</div>
