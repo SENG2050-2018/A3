@@ -48,7 +48,12 @@ public class FrontController extends HttpServlet
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/Login.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
+					request.setAttribute("reports", DA.getKbReports());
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/KnowledgeBase.jsp");
+					dispatcher.forward(request, response);
+				case "kb_issue":
+					request.setAttribute("reports", DA.getKbReports());
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ReportIssue.jsp");

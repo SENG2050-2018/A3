@@ -9,17 +9,23 @@
 -->
 
 <div class='centered spaced' >
-	<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=itservices'><c:out value="Home" /></a>
+	<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=itservices'><c:out value="Home" /></a>
 	
 	<c:forEach var="parameter" items="${param}" >
 		<c:choose>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'report_issue')}" >
 				<span class='fa fa-chevron-right'></span>
-				<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=report_issue'><c:out value="Report Issue" /></a>
+				<span class='urlPart'>Report Issue</span>
 			</c:when>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'kb_search')}" >
 				<span class='fa fa-chevron-right'></span>
-				<a class='urlPart' href='<%=request.getContextPath()%>/itservices?id=kb_search'><c:out value="Knowledge Base" /></a>
+				<span class='urlPart'>Knowledge Base</span>
+			</c:when>
+			<c:when test="${(parameter.key == 'id') && (parameter.value == 'kb_issue')}" >
+				<span class='fa fa-chevron-right'></span>
+				<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=kb_search'>Knowledge Base</a>
+				<span class='fa fa-chevron-right'></span>
+				<span class='urlPart'><c:out value="issue" /></span> <!-- edit this later -->
 			</c:when>
 		</c:choose>
 	</c:forEach>

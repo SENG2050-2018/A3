@@ -1,15 +1,6 @@
 <!DOCTYPE html>
-<!--
-	FILENAME:		Login.jsp
-	DEVELOPER(S):	Bradley Turner
-	
-	LAST MODIFIED:	18/05/2018
-	BRIEF DESCRIPTION:	
-		
--->
-
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 	<head>
 		<title>IT Services</title>
@@ -19,6 +10,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<script src='${pageContext.servletContext.contextPath}/js/dropdown-mobile-support.js'></script>
+
 	</head>
 	<body>
 		<div class='flex-container'>
@@ -30,32 +22,28 @@
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
-				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<div class='centered form'>
 					<section class='title'>
-						<h1>Knowledge Base</h1>
+						<h1>Issue title</h1>
 					</section>
 					<section>
 						<p>
-							Showing <c:out value="${fn:length(reports)}" /> results
+							category: xxx <br>
+							submitted by user: xxxx <br>
 						</p>
 					</section>
-					<ul class='alerts grid links'>
-						<c:forEach var='report' items='${reports}'>
-							
-							<li class='cellSpan'>
-								<a href='${pageContext.servletContext.contextPath}/itservices?id=kb_issue&kb_id=${report.id}'>
-									<h2><c:out value="${report.title}" /></h2>
-									<p class='small'>Category: <c:out value="${report.category}" /></p>	
-									<p><c:out value="${report.description}" /></p>
-								</a>
-							</li>
-							
-						</c:forEach>
-					</ul>
-				</form>
+					<section>
+						<p>
+							description <br>
+							resolution <br>
+						</p>
+					</section>
+					<section>
+						<p> comments </p>
+					</section>
+				</div>
+				
 			</div>
 		</div>
 	</body>
-	
-	
 </html>
