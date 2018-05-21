@@ -5,14 +5,14 @@ import javax.sql.*;
 import javax.naming.*;
 import java.util.*;
 import java.io.Serializable;
-import beans.Report;
+import beans.*;
 
 public class DataAccess 
 {
-	public List<Report> getAllAlerts()
+	public List<Alert> getAllAlerts()
 	{
-		String query = "SELECT * FROM alert";
-		List<Report> alerts = new LinkedList<>();
+		String query = "SELECT * FROM alert WHERE ((start_time <= CURRENT_TIMESTAMP) AND (end_time >= CURRENT_TIMESTAMP))";
+		List<Alert> alerts = new LinkedList<>();
 		
 		Context ctx = null;
 		Connection conn = null;
@@ -25,14 +25,12 @@ public class DataAccess
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
-			System.out.println("query executed");
 			while (rs.next())
 			{
-				Report rep = new Report();
-				rep.setTitle(rs.getString(1));
-				rep.setDescription(rs.getString(4));
-				rep.setReporter(rs.getString(2));
-				reports.add(rep);
+				Alert temp = new Alert();
+				temp.setTitle(rs.getString(3));
+				temp.setDescription(rs.getString(4));
+				alerts.add(temp);
 			}
 			
 			
@@ -52,7 +50,7 @@ public class DataAccess
 				stmt.close();
 				conn.close();
 				ctx.close();
-				return reports;
+				return alerts;
 			}
 			catch (NamingException e)
 			{

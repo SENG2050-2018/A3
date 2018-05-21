@@ -90,10 +90,12 @@
 				<!-- Display for maintenance alerts, etc, set by system administrators -->
 				<h1 class='subtitle'>Alerts</h1>
 				<ul class='alerts grid links'>
-					<li class='cellSpan'>
-						<h2>Example - Scheduled Maintenance</h2>
-						<p>Scheduled for now. click to see more details etc etc..</p>
-					</li>
+					<c:forEach var='alert' items='${alerts}'>
+						<li class='cellSpan'>
+							<h2><c:out value="${alert.title}" /></h2>
+							<p><c:out value="${alert.description}" /></p>
+						</li>
+					</c:forEach>	
 				</ul>
 			</div>
 		</div>

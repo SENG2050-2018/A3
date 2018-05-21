@@ -10,12 +10,13 @@ import java.io.*;
 import java.sql.*;
 import javax.sql.*;
 import java.util.*;
-
+import beans.*;
 
 public class FrontController extends HttpServlet
 {
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
+		DataAccess DA = new DataAccess();
 		String id = request.getParameter("id");
 		
 		
@@ -23,6 +24,7 @@ public class FrontController extends HttpServlet
 		if (session == null)
 		{
 			//redirect to login
+			request.setAttribute("alerts", DA.getAllAlerts());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -35,6 +37,7 @@ public class FrontController extends HttpServlet
 		
 		RequestDispatcher dispatcher;
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
+			request.setAttribute("alerts", DA.getAllAlerts());
 			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -52,6 +55,7 @@ public class FrontController extends HttpServlet
 					dispatcher.forward(request, response);
 				case "itservices":
 				default:
+					request.setAttribute("alerts", DA.getAllAlerts());
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
 					dispatcher.forward(request, response);
 			}
