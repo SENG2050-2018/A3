@@ -9,10 +9,10 @@ import beans.Report;
 
 public class DataAccess 
 {
-	public List<Report> getAllIssueReports()
+	public List<Report> getAllAlerts()
 	{
-		String query = "SELECT * FROM V_KnowledgeBase";
-		List<Report> reports = new LinkedList<>();
+		String query = "SELECT * FROM alert";
+		List<Report> alerts = new LinkedList<>();
 		
 		Context ctx = null;
 		Connection conn = null;

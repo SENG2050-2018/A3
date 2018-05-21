@@ -16,7 +16,6 @@ public class FrontController extends HttpServlet
 {
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
-		DataAccess DA = new DataAccess();
 		String id = request.getParameter("id");
 		
 		
@@ -46,15 +45,6 @@ public class FrontController extends HttpServlet
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/Login.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
-					try {
-						
-						request.getSession().setAttribute("reports", DA.getAllIssueReports());
-						System.out.println("passed to session");
-					} catch (Exception e)
-					{
-						System.out.println("Exception");
-					}
-					
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
