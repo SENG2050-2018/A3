@@ -10,15 +10,15 @@
 <div class='flex-row'>
 	<div class='navBar'>
 		<div class='dropdown'>
-			<button class='dropBtn' onclick="closeDropDown(0)"> Users name
+			<button class='dropBtn' onclick="closeDropDown(0)"> ${user.firstName} ${user.surname} 
 				<span class='fa fa-caret-down'></span>
 			</button>
 			<div class="dropdown-content" style='right:0'>
 				<a href="#">Profile</a>
-				<a href="#">Logout</a>
+				<a href="${pageContext.servletContext.contextPath}/logout">Logout</a>
 			</div>
 		</div>
-		<a href="<%=request.getContextPath()%>/itservices?id=kb_search" class='largeScreenOnly'>Knowledge</a>
+		<a href="${pageContext.servletContext.contextPath}/itservices?id=kb_search" class='largeScreenOnly'>Knowledge</a>
 		<div class='dropdown' >
 			<button class='dropBtn' onclick="closeDropDown(1)"> Notices</button>
 			<div class="dropdown-content">

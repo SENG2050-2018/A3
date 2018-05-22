@@ -141,4 +141,66 @@ public class DataAccess
 			return null;
 		}
 	}
+	
+	public User getUser(String user_name) //change to prepared statement
+	{
+		String query = "SELECT user_name, first_name, surname, email, contact_number FROM users WHERE (users.user_name = '" + user_name + "')";
+		User temp = new User();
+		
+		Context ctx = null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next())
+			{
+				temp.setUserName(rs.getString(1));
+				temp.setFirstName(rs.getString(2));
+				temp.setSurname(rs.getString(3));
+				temp.setEmail(rs.getString(4));
+				temp.setContactNumber(rs.getString(5));
+			}
+			
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				ctx.close();
+				
+				//finally return the list
+				return temp;
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
 }

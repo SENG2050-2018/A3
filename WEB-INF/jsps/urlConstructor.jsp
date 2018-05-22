@@ -9,7 +9,7 @@
 -->
 
 <div class='centered spaced' >
-	<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=itservices'><c:out value="Home" /></a>
+	<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices'>Home</a>
 	
 	<c:forEach var="parameter" items="${param}" >
 		<c:choose>

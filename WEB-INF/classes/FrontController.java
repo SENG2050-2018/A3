@@ -19,23 +19,11 @@ public class FrontController extends HttpServlet
 		DataAccess DA = new DataAccess();
 		String id = request.getParameter("id");
 		
-		
-		HttpSession session = request.getSession(false);
-		if (session == null)
-		{
-			//redirect to login
-			request.setAttribute("alerts", DA.getAllAlerts());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
-			dispatcher.forward(request, response);
-		}
-		//if (bean user == null ) {
-			//redirect to login
-		//}
-		//if (valid(bean user) == false){
-			//redirect to login
-		//}
-		
 		RequestDispatcher dispatcher;
+		
+		//user should be set for all pages
+		request.setAttribute("user", DA.getUser(request.getUserPrincipal().getName()));
+		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
 			request.setAttribute("alerts", DA.getAllAlerts());
 			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");

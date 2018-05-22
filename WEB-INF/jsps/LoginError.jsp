@@ -24,18 +24,9 @@
 			<div class='flex-row'>
 				<form class='centered form' action='j_security_check' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
-						<h1>IT Services Login</h1>
+						<h1>Login error</h1>
 					</section>
-					<div class='login'>
-						<section>
-							<label for='j_username'>Username: </label>
-							<input name='j_username' type='text'>
-							
-							<label for='j_password'>Password: </label>
-							<input name='j_password' type='password'>
-							<input type='submit' value="Login" />
-						</section>
-					</div>
+					<a href="${pageContext.servletContext.contextPath}/WEB-INF/jsps/Login.jsp">Return to login</a>
 				</form>
 			</div>
 		</div>
