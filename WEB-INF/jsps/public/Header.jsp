@@ -2,7 +2,7 @@
 	FILENAME:		Header.jsp
 	DEVELOPER(S):	Bradley Turner
 	
-	LAST MODIFIED:	14/05/2018
+	LAST MODIFIED:	22/05/2018
 	BRIEF DESCRIPTION:	
 		Masterpage header layout -> top navigation bar
 -->
@@ -14,7 +14,7 @@
 				<span class='fa fa-caret-down'></span>
 			</button>
 			<div class="dropdown-content" style='right:0'>
-				<a href="#">Profile</a>
+				<a href="${pageContext.servletContext.contextPath}/itservices?id=profile">Profile</a>
 				<a href="${pageContext.servletContext.contextPath}/logout">Logout</a>
 			</div>
 		</div>

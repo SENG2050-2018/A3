@@ -26,30 +26,30 @@ public class FrontController extends HttpServlet
 		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
 			request.setAttribute("alerts", DA.getAllAlerts());
-			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
 			switch (id)
 			{
-				case "login":
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/Login.jsp");
+				case "profile":
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/Profile.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
 					request.setAttribute("reports", DA.getKbReports());
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/KnowledgeBase.jsp");
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
 				case "kb_issue":
-					request.setAttribute("reports", DA.getKbReports());
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/KnowledgeBaseIssue.jsp");
+					request.setAttribute("reports", DA.getKbReports()); //may not be necessary
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ReportIssue.jsp");
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
 					dispatcher.forward(request, response);
 				case "itservices":
 				default:
 					request.setAttribute("alerts", DA.getAllAlerts());
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/ItServices.jsp");
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 					dispatcher.forward(request, response);
 			}
 		}

@@ -14,7 +14,7 @@
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
+		<link rel='stylesheet' href="${pageContext.servletContext.contextPath}/css/Styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 
@@ -26,7 +26,7 @@
 					<section class='title'>
 						<h1>Login error</h1>
 					</section>
-					<a href="${pageContext.servletContext.contextPath}/WEB-INF/jsps/Login.jsp">Return to login</a>
+					<a href="${pageContext.servletContext.contextPath}/itservices">Return to login</a>
 				</form>
 			</div>
 		</div>

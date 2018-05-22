@@ -21,6 +21,10 @@
 				<span class='fa fa-chevron-right'></span>
 				<span class='urlPart'>Knowledge Base</span>
 			</c:when>
+			<c:when test="${(parameter.key == 'id') && (parameter.value == 'profile')}" >
+				<span class='fa fa-chevron-right'></span>
+				<span class='urlPart'>Profile</span>
+			</c:when>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'kb_issue')}" >
 				<span class='fa fa-chevron-right'></span>
 				<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=kb_search'>Knowledge Base</a>

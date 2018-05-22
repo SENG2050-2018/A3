@@ -5,10 +5,10 @@
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/Styles.css">
+		<link rel='stylesheet' href="${pageContext.servletContext.contextPath}/css/Styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
-		<script src='<%=request.getContextPath()%>/js/dropdown-mobile-support.js'></script>
+		<script src='${pageContext.servletContext.contextPath}/js/dropdown-mobile-support.js'></script>
 	</head>
 	<body>
 		<div class='flex-container'>

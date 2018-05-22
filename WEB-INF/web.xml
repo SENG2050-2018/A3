@@ -51,7 +51,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Must be logged in</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/itservices</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>system_admin</role-name>
