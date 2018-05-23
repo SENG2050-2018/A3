@@ -16,16 +16,24 @@ public class FrontController extends HttpServlet
 {
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
+		doPost(request, response);
+	}
+	
+	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
+	{
 		DataAccess DA = new DataAccess();
 		String id = request.getParameter("id");
 		
 		RequestDispatcher dispatcher;
-		
+		HttpSession session = request.getSession();
 		//user should be set for all pages
-		request.setAttribute("user", DA.getUser(request.getUserPrincipal().getName()));
+		session.setAttribute("user", DA.getUser(request.getUserPrincipal().getName()));
+		String isStaff = String.valueOf(!request.isUserInRole("public_user"));
+		session.setAttribute("isStaff", isStaff);
+		System.out.println(session.getAttribute("isStaff"));
 		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
-			request.setAttribute("alerts", DA.getAllAlerts());
+			session.setAttribute("alerts", DA.getAllAlerts());
 			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -36,11 +44,12 @@ public class FrontController extends HttpServlet
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/Profile.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
-					request.setAttribute("reports", DA.getKbReports());
+					session.setAttribute("reports", DA.getKbReports());
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
 				case "kb_issue":
-					request.setAttribute("reports", DA.getKbReports()); //may not be necessary
+					String kb_id = request.getParameter("kb_id");
+					session.setAttribute("report", DA.getReport(kb_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
@@ -48,7 +57,7 @@ public class FrontController extends HttpServlet
 					dispatcher.forward(request, response);
 				case "itservices":
 				default:
-					request.setAttribute("alerts", DA.getAllAlerts());
+					session.setAttribute("alerts", DA.getAllAlerts());
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 					dispatcher.forward(request, response);
 			}
@@ -71,13 +80,6 @@ public class FrontController extends HttpServlet
 		
 		
 		
-		
-		
-		
-	}
-	
-	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
-	{
 		
 	}
 	

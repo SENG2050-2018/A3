@@ -29,7 +29,7 @@
 				<span class='fa fa-chevron-right'></span>
 				<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=kb_search'>Knowledge Base</a>
 				<span class='fa fa-chevron-right'></span>
-				<span class='urlPart'><c:out value="issue" /></span> <!-- edit this later -->
+				<span class='urlPart'><c:out value="${report.title}" /></span> <!-- edit this later -->
 			</c:when>
 		</c:choose>
 	</c:forEach>

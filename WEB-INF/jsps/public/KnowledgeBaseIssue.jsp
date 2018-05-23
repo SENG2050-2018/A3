@@ -3,6 +3,11 @@
 
 <html>
 	<head>
+		<%	//Prevents the user from reloading the page
+		response.setHeader("Cache-Control","no-store");
+		response.setHeader("Pragma","no-cache"); 
+		response.setHeader ("Expires", "0"); 
+		%>
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
@@ -24,18 +29,18 @@
 			<div class='flex-row'>
 				<div class='centered form'>
 					<section class='title'>
-						<h1>Issue title</h1>
+						<h1><c:out value="${report.title}" /></h1>
 					</section>
 					<section>
 						<p>
-							category: xxx <br>
-							submitted by user: xxxx <br>
+							category: <c:out value="${report.category}" /> <br>
+							submitted by user: <c:out value="${report.reporter}" /> <br>
 						</p>
 					</section>
 					<section>
 						<p>
-							description <br>
-							resolution <br>
+							description: <c:out value="${report.description}" /> <br>
+							resolution: <c:out value="${report.resolution}" /> <br>
 						</p>
 					</section>
 					<section>

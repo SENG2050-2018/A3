@@ -1,3 +1,4 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!--
 	FILENAME:		Header.jsp
 	DEVELOPER(S):	Bradley Turner
@@ -19,13 +20,24 @@
 			</div>
 		</div>
 		<a href="${pageContext.servletContext.contextPath}/itservices?id=kb_search" class='largeScreenOnly'>Knowledge</a>
+		<c:if test="${sessionScope.isStaff == true}" >
+			<div class='dropdown' >
+				<button class='dropBtn largeScreenOnly' onclick="closeDropDown(1)">Admin</button>
+				<div class="dropdown-content">
+					<a href="#">View issues</a>
+					<a href="#">Create / edit users</a>
+					<a href="#">Create new alerts</a>
+				</div>
+			</div>
+		</c:if>
 		<div class='dropdown' >
-			<button class='dropBtn' onclick="closeDropDown(1)"> Notices</button>
+			<button class='dropBtn' onclick="closeDropDown(2)"> Notices</button>
 			<div class="dropdown-content">
 				<a href="#">dynamic creation</a>
 				<a href="#">dynamic creation</a>
 			</div>
 		</div>
+		
 		
 		
 	</div>

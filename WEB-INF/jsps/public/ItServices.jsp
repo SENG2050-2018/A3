@@ -33,16 +33,20 @@
 			<div class='flex-row'>
 				<ul class='grid links'>
 					<li class='cell offset'>
-						<a href="${pageContext.servletContext.contextPath}/itservices?id=kb_search" class='mimicBtn'>
-							<h2>Search Knowledge</h2>
-							<p>Search our knowledge base and find answers</p>
-						</a>
+						<form action="${pageContext.servletContext.contextPath}/itservices?id=kb_search" method="post">
+							<button class='mimicBtn' type='submit'>
+								<h2>Search Knowledge</h2>
+								<p>Search our knowledge base and find answers</p>
+							</button>
+						</form>
 					</li>
 					<li class='cell'>
-						<a href="${pageContext.servletContext.contextPath}/itservices?id=report_issue" class='mimicBtn'>
-							<h2>Report an Issue</h2>
-							<p>Experiencing a problem&#63; Report it here</p>
-						</a>
+						<form action="${pageContext.servletContext.contextPath}/itservices?id=report_issue" method="post">
+							<button class='mimicBtn' type='submit'>
+								<h2>Report an Issue</h2>
+								<p>Experiencing a problem&#63; Report it here</p>
+							</button>
+						</form>
 					</li>
 				</ul>
 				

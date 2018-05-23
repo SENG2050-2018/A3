@@ -2,6 +2,11 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
+		<%	//Prevents the user from reloading the page
+		response.setHeader("Cache-Control","no-store");
+		response.setHeader("Pragma","no-cache"); 
+		response.setHeader ("Expires", "0"); 
+		%>
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">

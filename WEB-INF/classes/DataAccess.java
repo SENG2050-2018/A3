@@ -142,6 +142,75 @@ public class DataAccess
 		}
 	}
 	
+	public Report getReport(String report_id) //change to prepared statement
+	{
+		String query = "SELECT * FROM issue_reports WHERE (issue_reports.issue_id = '" + report_id + "')";
+		Report temp = new Report();
+		
+		Context ctx = null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next())
+			{
+				temp.setId(rs.getString(1));
+				temp.setReporter(rs.getString(2));
+				temp.setTitle(rs.getString(3));
+				temp.setCategory(rs.getString(5));
+				temp.setDescription(rs.getString(6));
+				temp.setReported(rs.getString(7));
+				temp.setResolved(rs.getString(8));
+				temp.setResolution(rs.getString(9));
+				temp.setInternalAccess(rs.getString(10));
+				temp.setAltBrowser(rs.getString(11));
+				temp.setPcRestart(rs.getString(12));
+			}
+			
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				ctx.close();
+				
+				//finally return the list
+				return temp;
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
+	
 	public User getUser(String user_name) //change to prepared statement
 	{
 		String query = "SELECT user_name, first_name, surname, email, contact_number FROM users WHERE (users.user_name = '" + user_name + "')";

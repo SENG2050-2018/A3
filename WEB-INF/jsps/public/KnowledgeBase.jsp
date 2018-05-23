@@ -12,6 +12,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
+		<%	//Prevents the user from reloading the page
+		response.setHeader("Cache-Control","no-store");
+		response.setHeader("Pragma","no-cache"); 
+		response.setHeader ("Expires", "0"); 
+		%>
 		<title>IT Services</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
@@ -30,7 +35,7 @@
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
-				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<div class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
 						<h1>Knowledge Base</h1>
 					</section>
@@ -39,20 +44,23 @@
 							Showing <c:out value="${fn:length(reports)}" /> results
 						</p>
 					</section>
-					<ul class='alerts grid links'>
+					<ul class='grid links'>
 						<c:forEach var='report' items='${reports}'>
 							
 							<li class='cellSpan'>
-								<a href='${pageContext.servletContext.contextPath}/itservices?id=kb_issue&kb_id=${report.id}'>
-									<h2><c:out value="${report.title}" /></h2>
-									<p class='small'>Category: <c:out value="${report.category}" /></p>	
-									<p><c:out value="${report.description}" /></p>
-								</a>
+								<form action="${pageContext.servletContext.contextPath}/itservices?id=kb_issue" method="post">
+									<input type='hidden' name='kb_id' value='${report.id}' />
+									<button type='submit' class='mimicLink'>
+										<h2><c:out value="${report.title}" /></h2>
+										<p>Category: <span class='inverse'><c:out value="${report.category}" /></span></p>	
+										<p><c:out value="${report.description}" /></p>
+									</button>
+								</form>
 							</li>
 							
 						</c:forEach>
 					</ul>
-				</form>
+				</div>
 			</div>
 		</div>
 	</body>
