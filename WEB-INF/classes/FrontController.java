@@ -21,16 +21,27 @@ public class FrontController extends HttpServlet
 	
 	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
 	{
+		RequestDispatcher dispatcher;
+		HttpSession session = request.getSession();
 		DataAccess DA = new DataAccess();
 		String id = request.getParameter("id");
 		
-		RequestDispatcher dispatcher;
-		HttpSession session = request.getSession();
-		//user should be set for all pages
+		
+
+		//user should be set for all pages.
 		session.setAttribute("user", DA.getUser(request.getUserPrincipal().getName()));
-		String isStaff = String.valueOf(!request.isUserInRole("public_user"));
-		session.setAttribute("isStaff", isStaff);
-		System.out.println(session.getAttribute("isStaff"));
+		
+		//isStaff should be set for all pages so header knows when to display administrator pages to the client.
+		session.setAttribute("isStaff", String.valueOf(!request.isUserInRole("public_user")));
+		
+		//notices should be set for all pages so header can display relevant notices to the client.
+		List<Report> reports = DA.getReports("userNotices", request.getUserPrincipal().getName());
+		
+		//DEBUG--------------------------------------------------------------
+		for (Report r : reports){
+			System.out.println(r.getTitle());
+		}
+		session.setAttribute("notices", reports);
 		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
 			session.setAttribute("alerts", DA.getAllAlerts());
@@ -44,17 +55,26 @@ public class FrontController extends HttpServlet
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/Profile.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
-					session.setAttribute("reports", DA.getKbReports());
+					session.setAttribute("reports", DA.getReports("knowledgebase", null));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
-				case "kb_issue":
-					String kb_id = request.getParameter("kb_id");
-					session.setAttribute("report", DA.getReport(kb_id));
+				case "issue":
+					String src = request.getParameter("src");
+					String issue_id = request.getParameter("issue_id");
+					
+					session.setAttribute("src", src);
+					session.setAttribute("report", DA.getReport(issue_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
 					dispatcher.forward(request, response);
+				case "issue_base":
+					if (!request.isUserInRole("public_user")){
+						session.setAttribute("reports", DA.getReports("all", null));
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/IssueBase.jsp");
+						dispatcher.forward(request, response);
+					}
 				case "itservices":
 				default:
 					session.setAttribute("alerts", DA.getAllAlerts());

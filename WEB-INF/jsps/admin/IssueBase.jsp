@@ -28,16 +28,16 @@
 	<body>
 		<div class='flex-container'>
 			<!-- Top navigation bar -->
-			<jsp:include page="Header.jsp" />
+			<jsp:include page="../public/Header.jsp" />
 			
 			<div class='flex-row spacing'></div>
-			<jsp:include page="urlConstructor.jsp" />
+			<jsp:include page="../public/urlConstructor.jsp" />
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
 				<div class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
-						<h1>Knowledge Base</h1>
+						<h1>Issues</h1>
 					</section>
 					<section>
 						<p>
@@ -50,7 +50,7 @@
 							<li class='cellSpan'>
 								<form action="${pageContext.servletContext.contextPath}/itservices?id=issue" method="post">
 									<input type='hidden' name='issue_id' value='${report.id}' />
-									<input type='hidden' name='src' value='kb' />
+									<input type='hidden' name='src' value='ib' />
 									<button type='submit' class='mimicLink'>
 										<h2><c:out value="${report.title}" /></h2>
 										<p>Category: <span class='inverse'><c:out value="${report.category}" /></span></p>	
