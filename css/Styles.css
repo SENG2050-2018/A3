@@ -155,6 +155,7 @@ body {
 	background: var(--blue);
 	padding: 0 10px;
 	border-radius: 6px;
+	margin-right: 5px;
 }
 
 .subtitle {

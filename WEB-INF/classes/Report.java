@@ -3,7 +3,7 @@ package beans;
 import java.io.Serializable;
 public class Report implements Serializable
 {
-	private String id, title, description, reporter, category, reported, resolved, resolution, internalAccess, altBrowser, pcRestart; //Since there is no calculating these should all be strings
+	private String id, title, description, reporter, category, state, reported, resolved, resolution, internalAccess, altBrowser, pcRestart; //Since there is no calculating these should all be strings
 	
 	public Report()
 	{
@@ -12,6 +12,7 @@ public class Report implements Serializable
 		this.description = "";
 		this.reporter = "";
 		this.category = "";
+		this.state = "";
 		this.reported = "";
 		this.resolved = "";
 		this.resolution = "";
@@ -44,6 +45,11 @@ public class Report implements Serializable
 	public void setCategory(String category)
 	{
 		this.category = category;
+	}
+	
+	public void setState(String state)
+	{
+		this.state = state;
 	}
 	
 	public void setReported(String reported)
@@ -100,6 +106,11 @@ public class Report implements Serializable
 	public String getCategory()
 	{
 		return category;
+	}
+	
+	public String getState()
+	{
+		return state;
 	}
 	
 	public String getReported()

@@ -216,7 +216,7 @@ public class DataAccess
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.issue_state = 'knowledgebase')";
 					break;
 				case "all":
-					query = "SELECT * FROM issue_reports ORDER BY issue_reports.category";
+					query = "SELECT * FROM issue_reports ORDER BY FIELD(issue_reports.category, 'new', 'in-progress', 'completed', 'resolved')";
 					break;
 				case "userNotices":
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND issue_reports.issue_state='completed')";
@@ -245,6 +245,7 @@ public class DataAccess
 					temp.setId(rs.getString(1));
 					temp.setReporter(rs.getString(2));
 					temp.setTitle(rs.getString(3));
+					temp.setState(rs.getString(4));
 					temp.setCategory(rs.getString(5));
 					temp.setDescription(rs.getString(6));
 					temp.setReported(rs.getString(7));

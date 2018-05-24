@@ -53,7 +53,7 @@
 									<input type='hidden' name='src' value='ib' />
 									<button type='submit' class='mimicLink'>
 										<h2><c:out value="${report.title}" /></h2>
-										<p>Category: <span class='inverse'><c:out value="${report.category}" /></span></p>	
+										<p>State: <span class='inverse'><c:out value="${report.state}" /></span>Category: <span class='inverse'><c:out value="${report.category}" /></span></p>	
 										<p><c:out value="${report.description}" /></p>
 									</button>
 								</form>
