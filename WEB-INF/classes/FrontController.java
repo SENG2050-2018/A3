@@ -29,7 +29,7 @@ public class FrontController extends HttpServlet
 		
 
 		//user should be set for all pages.
-		session.setAttribute("user", DA.getUser(request.getUserPrincipal().getName()));
+		session.setAttribute("user", DA.getUsers(request.getUserPrincipal().getName()));
 		
 		//isStaff should be set for all pages so header knows when to display administrator pages to the client.
 		session.setAttribute("isStaff", String.valueOf(!request.isUserInRole("public_user")));
@@ -44,7 +44,7 @@ public class FrontController extends HttpServlet
 		session.setAttribute("notices", reports);
 		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
-			session.setAttribute("alerts", DA.getAllAlerts());
+			session.setAttribute("alerts", DA.getAlerts());
 			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -63,7 +63,7 @@ public class FrontController extends HttpServlet
 					String issue_id = request.getParameter("issue_id");
 					
 					session.setAttribute("src", src);
-					session.setAttribute("report", DA.getReport(issue_id));
+					session.setAttribute("report", DA.getReports(issue_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
 				case "report_issue":
@@ -77,7 +77,7 @@ public class FrontController extends HttpServlet
 					}
 				case "itservices":
 				default:
-					session.setAttribute("alerts", DA.getAllAlerts());
+					session.setAttribute("alerts", DA.getAlerts());
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
 					dispatcher.forward(request, response);
 			}

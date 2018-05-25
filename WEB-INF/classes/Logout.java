@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Logout extends HttpServlet
 {
-	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
+	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
 		HttpSession session = request.getSession(false);
 		if (session != null)
@@ -13,5 +13,10 @@ public class Logout extends HttpServlet
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/itservices");
+	}
+	
+	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
+	{
+		doPost(request, response);
 	}
 }
