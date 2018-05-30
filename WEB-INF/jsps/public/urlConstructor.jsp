@@ -41,6 +41,10 @@
 						<span class='fa fa-chevron-right'></span>
 						<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=issue_base'>Issue Base</a>
 					</c:when>
+					<c:when test="${param.src == 'profile'}" >
+						<span class='fa fa-chevron-right'></span>
+						<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=profile'>Profile</a>
+					</c:when>
 				</c:choose>
 				
 				<span class='fa fa-chevron-right'></span>

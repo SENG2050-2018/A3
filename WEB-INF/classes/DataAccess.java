@@ -165,7 +165,7 @@ public class DataAccess
 	*			reporter_user_name = userId
 	*/
 	public List<Report> getReports(String selector, String userId){
-		if ((selector != "knowledgebase") && (selector != "userNotices") && (selector != "all"))		{return null;}
+		if ((selector != "knowledgebase") && (selector != "userNotices") && (selector != "all") && (selector != "usersCurrent") && (selector != "usersPrevious"))		{return null;}
 		else
 		{
 			List<Report> reports = new LinkedList<>();
@@ -182,6 +182,12 @@ public class DataAccess
 					break;
 				case "userNotices":
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND issue_reports.issue_state='completed')";
+					break;
+				case "usersCurrent":
+					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND (issue_reports.issue_state='completed' OR issue_reports.issue_state='in-progress' OR issue_reports.issue_state='new')) ORDER BY issue_reports.reported";
+					break;
+				case "usersPrevious":
+					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND issue_reports.issue_state='resolved')";
 					break;
 			}
 			

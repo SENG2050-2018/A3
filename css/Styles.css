@@ -84,7 +84,7 @@ body {
 /* span all cell in a css grid, styled to fill all but the first and last column in the grid */
 .cellSpan {
 	padding: 0 20px;
-	grid-column: 2 / -2;
+	grid-column: 1 / -1;
 }
 
 
@@ -210,6 +210,7 @@ section > textarea {
 	color: #777777;
 	font-size: 15px;
 	margin: 0 0 15px 0;
+	display: block;
 }
 
 .title > h1 {
@@ -314,12 +315,29 @@ section > textarea {
     display: block;
 }
 
-
+.contactInfo > span {
+	margin-top: 15px;
+	display: block;
+	width: 200px;
+}
 
 /* ============================================= Styling for Desktop and Tablet ============================================= */
 @media only screen and (min-width: 375px) {
+	.contactInfo > span {
+		display: inline-block;
+	}
+	
+	.small {
+		display: inline;
+	}
+	
 	.largeScreenOnly {
 		display: block;
+	}
+	
+	.cellSpan {
+		padding: 0 20px;
+		grid-column: 2 / -2;
 	}
 }
 

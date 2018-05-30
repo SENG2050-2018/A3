@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<%	//Prevents the user from reloading the page
@@ -25,21 +26,77 @@
 			
 			<div class='flex-row'>
 				<div class='centered form'>
-					<section class='title'>
+					<section class='title largeScreenOnly'>
 						<h1>Profile</h1>
 					</section>
 					<section>
 						<h2><c:out value="${user.firstName}" /> <c:out value="${user.surname}" /> <span class='small'>( <c:out value="${user.userName}" /> )</span></h2>
-					</section>
-					<section>
-						<p>
-							email: <c:out value="${user.email}" />  <br>
-							contact number: <c:out value="${user.contactNumber}" />  <br>
+					
+						<p class='contactInfo'>
+							<span><b>Email:</b></span> <c:out value="${user.email}" />  <br>
+							<span><b>Contact number:</b></span> <c:out value="${user.contactNumber}" />  <br>
 						</p>
 					</section>
 					
 				</div>
-				
+				<div class='centered form'>
+					<section class='title'>
+						<h2>Current transactions</h2>
+					</section>
+					<c:set var='count' value='${fn:length(current)}' />
+					<c:if test='${count != 0}' >
+						<ul class='grid links'>
+							<c:forEach var='report' items='${current}'>
+								
+								<li class='cellSpan'>
+									<form action="${pageContext.servletContext.contextPath}/itservices?id=issue" method="post">
+										<input type='hidden' name='issue_id' value='${report.id}' />
+										<input type='hidden' name='src' value='profile' />
+										<button type='submit' class='mimicLink'>
+											<h2><c:out value="${report.title}" /></h2>
+											<p>State: <span class='inverse'><c:out value="${report.state}" /></span></p>	
+											<p>Reported: <span class='inverse'><c:out value="${report.reported}" /></span></p>	
+										</button>
+									</form>
+								</li>
+								
+							</c:forEach>
+							
+						</ul>
+					</c:if>
+					<c:if test='${count == 0}'>
+						<p>You do not have any current issues reported.</p>
+					</c:if>
+				</div>
+				<div class='centered form'>
+					<section class='title'>
+						<h2>Previous transactions</h2>
+					</section>
+					<c:set var='count' value='${fn:length(previous)}' />
+					<c:if test='${count != 0}' >
+						<ul class='grid links'>
+							<c:forEach var='report' items='${previous}'>
+								
+								<li class='cellSpan'>
+									<form action="${pageContext.servletContext.contextPath}/itservices?id=issue" method="post">
+										<input type='hidden' name='issue_id' value='${report.id}' />
+										<input type='hidden' name='src' value='profile' />
+										<button type='submit' class='mimicLink'>
+											<h2><c:out value="${report.title}" /></h2>
+											<p>State: <span class='inverse'><c:out value="${report.state}" /></span></p>	
+											<p>Reported: <span class='inverse'><c:out value="${report.reported}" /></span></p>	
+										</button>
+									</form>
+								</li>
+								
+							</c:forEach>
+							
+						</ul>
+					</c:if>
+					<c:if test='${count == 0}'>
+						<p>You do not have any previously reported issues.</p>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</body>

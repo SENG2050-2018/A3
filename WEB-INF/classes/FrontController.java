@@ -36,11 +36,6 @@ public class FrontController extends HttpServlet
 		
 		//notices should be set for all pages so header can display relevant notices to the client.
 		List<Report> reports = DA.getReports("userNotices", request.getUserPrincipal().getName());
-		
-		//DEBUG--------------------------------------------------------------
-		for (Report r : reports){
-			System.out.println(r.getTitle());
-		}
 		session.setAttribute("notices", reports);
 		
 		if (id == null) {	//At this point the user is verified so if no id is supplied simply just redirect to homepage
@@ -52,6 +47,8 @@ public class FrontController extends HttpServlet
 			switch (id)
 			{
 				case "profile":
+					session.setAttribute("current", DA.getReports("usersCurrent", request.getUserPrincipal().getName()));
+					session.setAttribute("previous", DA.getReports("usersPrevious", request.getUserPrincipal().getName()));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/Profile.jsp");
 					dispatcher.forward(request, response);
 				case "kb_search":
