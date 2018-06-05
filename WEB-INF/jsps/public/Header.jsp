@@ -27,7 +27,7 @@
 				<button class='dropBtn largeScreenOnly' onclick="closeDropDown(1)">Admin</button>
 				<div class="dropdown-content">
 					<a href="${pageContext.servletContext.contextPath}/itservices?id=issue_base">View issues</a>
-					<a href="#">Create / edit users</a>
+					<a href="${pageContext.servletContext.contextPath}/itservices?id=view_user">Create / edit users</a>
 					<a href="#">Create new alerts</a>
 				</div>
 			</div>

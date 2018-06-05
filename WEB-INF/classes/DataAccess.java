@@ -81,8 +81,7 @@ public class DataAccess
 	*	Postconditions: Returns a specific beans.User object from the database specified by user_name.
 	*/
 	public User getUsers(String user_name){ //change to prepared statement
-
-		String query = "SELECT user_name, first_name, surname, email, contact_number FROM users WHERE (users.user_name = '" + user_name + "')";
+		String query = "SELECT user_name, first_name, surname, email, contact_number FROM users";
 		User temp = new User();
 		
 		Context ctx = null;
@@ -147,9 +146,70 @@ public class DataAccess
 	*	Postconditions: Returns a list of beans.User objects containing all the public users in the database.
 	*/
 	public List<User> getUsers() { 
-		//need to build
-		return null;
-	}
+		String query = "SELECT * FROM users";
+		List<User> users = new LinkedList<>();
+		
+		Context ctx = null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next())
+			{
+				User temp = new User();
+				temp.setUserName(rs.getString(1));
+				temp.setFirstName(rs.getString(3));
+				temp.setSurname(rs.getString(4));
+				temp.setEmail(rs.getString(5));
+				temp.setContactNumber(rs.getString(6));
+				
+				
+				users.add(temp);
+				
+
+			}
+			
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				ctx.close();
+				
+				//finally return the list
+				return users;
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return null;
+	}}
 	
 	
 	
@@ -321,7 +381,86 @@ public class DataAccess
 		}
 	}
 	
+	
+	// TESTING search bar
+		public Report getSearch(String report_title){//change to prepared statement
+		
+		String query = "SELECT * FROM issue_reports WHERE CONTAINS(issue_reports.title, "+ report_title +")";
+		Report temp = new Report();
+		
+		Context ctx = null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next())
+			{
+				temp.setId(rs.getString(1));
+				temp.setReporter(rs.getString(2));
+				temp.setTitle(rs.getString(3));
+				temp.setCategory(rs.getString(5));
+				temp.setDescription(rs.getString(6));
+				temp.setReported(rs.getString(7));
+				temp.setResolved(rs.getString(8));
+				temp.setResolution(rs.getString(9));
+				temp.setInternalAccess(rs.getString(10));
+				temp.setAltBrowser(rs.getString(11));
+				temp.setPcRestart(rs.getString(12));
+			}
+			
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				ctx.close();
+				
+				//finally return the list
+				return temp;
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
 	public void newReport(/*reporter_user_name, title, category, description*/)	{}
 	
 	public void updateReport(/*report_id, newIssueState*/) {}
+	
+	
+	
+
+	
+	
+	
+	
+	
 }

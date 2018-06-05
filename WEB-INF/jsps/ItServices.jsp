@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
 		<link rel='stylesheet' href="${pageContext.servletContext.contextPath}/css/Styles.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<script src='${pageContext.servletContext.contextPath}/js/dropdown-mobile-support.js'></script>
 
@@ -22,7 +22,7 @@
 				<div class='titleWrapper'>
 					<h1 class='pageTitle'><span style='color:white'>IT</span> SERVICES</h1>
 					<div class='search'>
-						<form action="${pageContext.servletContext.contextPath}/itservices?id=searchKnowledge" id='searchKnowledge' method="post">
+						<form id='kwSearch'>
 							<input name='searchBox' type='text' placeholder='How can we help?' class='searchBox'><button type='submit' class='searchBtn'><span class='fa fa-search'></span></button>
 						</form>
 					</div>
@@ -33,20 +33,16 @@
 			<div class='flex-row'>
 				<ul class='grid links'>
 					<li class='cell offset'>
-						<form action="${pageContext.servletContext.contextPath}/itservices?id=kb_search" method="post">
-							<button class='mimicBtn' type='submit'>
-								<h2>Search Knowledge</h2>
-								<p>Search our knowledge base and find answers</p>
-							</button>
-						</form>
+						<a href="${pageContext.servletContext.contextPath}/itservices?id=kb_search" class='mimicBtn'>
+							<h2>Search Knowledge</h2>
+							<p>Search our knowledge base and find answers</p>
+						</a>
 					</li>
 					<li class='cell'>
-						<form action="${pageContext.servletContext.contextPath}/itservices?id=report_issue" method="post">
-							<button class='mimicBtn' type='submit'>
-								<h2>Report an Issue</h2>
-								<p>Experiencing a problem&#63; Report it here</p>
-							</button>
-						</form>
+						<a href="${pageContext.servletContext.contextPath}/itservices?id=report_issue" class='mimicBtn'>
+							<h2>Report an Issue</h2>
+							<p>Experiencing a problem&#63; Report it here</p>
+						</a>
 					</li>
 				</ul>
 				

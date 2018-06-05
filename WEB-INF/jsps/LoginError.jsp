@@ -15,6 +15,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1">
 		<link rel='stylesheet' href="${pageContext.servletContext.contextPath}/css/Styles.css">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/css/login.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 
@@ -25,7 +26,9 @@
 				<form class='centered form' action='j_security_check' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
 						<h1>Login error</h1>
+						Incorrect Username or Password
 					</section>
+					</br>
 					<a href="${pageContext.servletContext.contextPath}/itservices">Return to login</a>
 				</form>
 			</div>

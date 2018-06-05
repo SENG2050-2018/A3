@@ -17,6 +17,8 @@ public class FrontController extends HttpServlet
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
+		String searchBox = request.getParameter("searchBox");
+
 	}
 	
 	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
@@ -55,6 +57,11 @@ public class FrontController extends HttpServlet
 					session.setAttribute("reports", DA.getReports("knowledgebase", null));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
+				case "searchKnowledge":
+					String searchString = request.getParameter("searchBox");
+					session.setAttribute("reports", DA.getSearch(searchString));
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/searchKnowledgeBase.jsp");
+					dispatcher.forward(request, response);	
 				case "issue":
 					String src = request.getParameter("src");
 					String issue_id = request.getParameter("issue_id");
@@ -66,12 +73,17 @@ public class FrontController extends HttpServlet
 				case "report_issue":
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
 					dispatcher.forward(request, response);
+				case "view_user":
+					session.setAttribute("User", DA.getUsers());
+					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/viewUser.jsp");
+					dispatcher.forward(request, response);
 				case "issue_base":
 					if (!request.isUserInRole("public_user")){
 						session.setAttribute("reports", DA.getReports("all", null));
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/IssueBase.jsp");
 						dispatcher.forward(request, response);
 					}
+
 				case "itservices":
 				default:
 					session.setAttribute("alerts", DA.getAlerts());

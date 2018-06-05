@@ -20,7 +20,7 @@
 			</c:when>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'kb_search')}" >
 				<span class='fa fa-chevron-right'></span>
-				<span class='urlPart'>Knowledge Base</span>
+				<span class='urlPart'>Search Knowledge Base</span>
 			</c:when>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'profile')}" >
 				<span class='fa fa-chevron-right'></span>
@@ -35,7 +35,7 @@
 				<c:choose>
 					<c:when test="${param.src == 'kb'}" >
 						<span class='fa fa-chevron-right'></span>
-						<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=kb_search'>Knowledge Base</a>
+						<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices?id=kb_search'>Search Knowledge Base</a>
 					</c:when>
 					<c:when test="${param.src == 'ib'}" >
 						<span class='fa fa-chevron-right'></span>
