@@ -58,10 +58,10 @@ public class FrontController extends HttpServlet
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
 					dispatcher.forward(request, response);
 				case "searchKnowledge":
-					String searchString = request.getParameter("searchBox");
-					session.setAttribute("reports", DA.getSearch(searchString));
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/searchKnowledgeBase.jsp");
-					dispatcher.forward(request, response);	
+					//String searchString = request.getParameter("searchBox");
+					//session.setAttribute("reports", DA.getSearch(searchString));
+					//dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/searchKnowledgeBase.jsp");
+					//dispatcher.forward(request, response);	
 				case "issue":
 					String src = request.getParameter("src");
 					String issue_id = request.getParameter("issue_id");
@@ -70,20 +70,50 @@ public class FrontController extends HttpServlet
 					session.setAttribute("report", DA.getReports(issue_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
+
+				
 				case "report_issue":
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
-					dispatcher.forward(request, response);
+					String sent = request.getParameter("sent");
+					if (sent != null) {
+						String title = request.getParameter("title");
+						String category = request.getParameter("category");
+						String description = request.getParameter("description");
+						
+						if (title == null || description == null || category == null){
+							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
+							dispatcher.forward(request, response);
+						}
+						
+						boolean internal = (String) request.getParameter("internal") == "1";
+						boolean altBrowser = (String) request.getParameter("altBrowser") == "1";
+						boolean pcRestart = (String) request.getParameter("pcRestart") == "1";
+						
+						// Create new issue report
+						System.out.println(title + ", " + category + ",\n" + description +  ",\n" + internal + ", " + altBrowser + ", " + pcRestart);
+						DA.newReport(request.getUserPrincipal().getName(), title, category, description, internal, altBrowser, pcRestart);
+						
+						
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
+						dispatcher.forward(request, response);
+					} 
+					else {
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
+						dispatcher.forward(request, response);
+					}
+				
+				
 				case "view_user":
-					session.setAttribute("User", DA.getUsers());
-					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/viewUser.jsp");
-					dispatcher.forward(request, response);
+					//session.setAttribute("User", DA.getUsers());
+					//dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/viewUser.jsp");
+					//dispatcher.forward(request, response);
+					break;
 				case "issue_base":
 					if (!request.isUserInRole("public_user")){
 						session.setAttribute("reports", DA.getReports("all", null));
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/IssueBase.jsp");
 						dispatcher.forward(request, response);
 					}
-
+					break;
 				case "itservices":
 				default:
 					session.setAttribute("alerts", DA.getAlerts());
@@ -91,25 +121,6 @@ public class FrontController extends HttpServlet
 					dispatcher.forward(request, response);
 			}
 		}
-		
-		/**
-		Should be structured something like :
-		
-		if user is not valid redirect to login
-		else 
-			if param id == itservices || null
-				itservices.jsp
-			if param id == resportIssue
-				reportissue.jsp
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	

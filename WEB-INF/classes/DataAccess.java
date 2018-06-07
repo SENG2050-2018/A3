@@ -97,11 +97,15 @@ public class DataAccess
 			rs = stmt.executeQuery(query);
 			while (rs.next())
 			{
-				temp.setUserName(rs.getString(1));
-				temp.setFirstName(rs.getString(2));
-				temp.setSurname(rs.getString(3));
-				temp.setEmail(rs.getString(4));
-				temp.setContactNumber(rs.getString(5));
+				if (rs.getString(1).equals(user_name)) 
+				{
+					temp.setUserName(rs.getString(1));
+					temp.setFirstName(rs.getString(2));
+					temp.setSurname(rs.getString(3));
+					temp.setEmail(rs.getString(4));
+					temp.setContactNumber(rs.getString(5));
+					break;
+				}
 			}
 			
 			
@@ -238,13 +242,13 @@ public class DataAccess
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.issue_state = 'knowledgebase')";
 					break;
 				case "all":
-					query = "SELECT * FROM issue_reports ORDER BY FIELD(issue_reports.category, 'new', 'in-progress', 'completed', 'resolved')";
+					query = "SELECT * FROM issue_reports ORDER BY FIELD(issue_reports.issue_state, 'new', 'in-progress', 'completed', 'resolved')";
 					break;
 				case "userNotices":
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND issue_reports.issue_state='completed')";
 					break;
 				case "usersCurrent":
-					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND (issue_reports.issue_state='completed' OR issue_reports.issue_state='in-progress' OR issue_reports.issue_state='new')) ORDER BY issue_reports.reported";
+					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "') ";
 					break;
 				case "usersPrevious":
 					query = "SELECT * FROM issue_reports WHERE (issue_reports.reporter_user_name = '" + userId + "' AND issue_reports.issue_state='resolved')";
@@ -383,7 +387,8 @@ public class DataAccess
 	
 	
 	// TESTING search bar
-		public Report getSearch(String report_title){//change to prepared statement
+	/**
+	public Report getSearch(String report_title){//change to prepared statement
 		
 		String query = "SELECT * FROM issue_reports WHERE CONTAINS(issue_reports.title, "+ report_title +")";
 		Report temp = new Report();
@@ -450,16 +455,65 @@ public class DataAccess
 			return null;
 		}
 	}
+	*/
 	
-	public void newReport(/*reporter_user_name, title, category, description*/)	{}
+	
+	public void newReport(String reporter, String title, String category, String description, boolean ia, boolean ab, boolean pr)	{
+		String insert = "INSERT INTO issue_reports (reporter_user_name, title, category, description, internal_access, alt_browser, pc_restart) "; //, internal_access, alt_browser, pc_restart
+		insert += "VALUES (?,?,?,?,?,?,?)"; //,'?','?','?'
+		
+		Context ctx = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(insert);
+			stmt.setString(1, reporter);
+			stmt.setString(2, title);
+			stmt.setString(3, category);
+			stmt.setString(4, description);
+			stmt.setBoolean(5, ia);
+			stmt.setBoolean(6, ab);
+			stmt.setBoolean(7, pr);
+			
+			stmt.execute();
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				stmt.close();
+				conn.close();
+				ctx.close();
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public void updateReport(/*report_id, newIssueState*/) {}
-	
-	
-	
-
-	
-	
 	
 	
 	

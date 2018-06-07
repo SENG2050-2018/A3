@@ -24,7 +24,7 @@
 			<jsp:include page="urlConstructor.jsp" />
 			
 			<div class='flex-row'>
-				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<form class='centered form' action='itservices?id=report_issue' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'> <!-- Title -->
 						<h1>Report Issue</h1>
 						<p class='small'>Experiencing a problem? Report it here</p>
@@ -40,22 +40,35 @@
 					</section>
 					
 					<section> <!-- required data -->
-						<input name='userID' type='hidden' text='usersId'>													<!-- reporter -->
-						
+						<input type='hidden' name='sent' value='true'>
 						<label for='title'><span class='red'>*</span>Briefly describe your issue</label>					<!-- title -->
 						<input name='title' type='text' required>
 						
+		
+						<p>
+							<label for='category'>Please select the category that is most applicable </label>				<!-- category -->
+							<select name='category'>
+							<option value="Email">Email</option>
+							<option value="Network">Network</option>
+							<option value="Hardware">Hardware</option>
+							<option value="Account">Account</option>
+							<option value="Other">Other</option>
+							</select>
+						</p>
+						
+						
+						
 						<p><span class='rdoText'><span class='red'>*</span> I am able to access internal websites:</span>	<!-- extra info -->
-						<input type="radio" name="internal" value="yes" id='int-yes'><label for='int-yes'>Yes</label>
-						<input type="radio" name="internal" value="no" id='int-no'><label for='int-no'>No</label>
+						<input type="radio" name="internal" value="1" id='int-yes'><label for='int-yes'>Yes</label>
+						<input type="radio" name="internal" value="0" id='int-no'><label for='int-no'>No</label>
 						</p>
 						<p><span class='rdoText'><span class='red'>*</span> I have tried using an alternate browser:</span>	<!-- extra info -->
-						<input type="radio" name="altBrowser" value="yes" id='alt-yes'><label for='alt-yes'>Yes</label>
-						<input type="radio" name="altBrowser" value="no" id='alt-no'><label for='alt-no'>No</label>
+						<input type="radio" name="altBrowser" value="1" id='alt-yes'><label for='alt-yes'>Yes</label>
+						<input type="radio" name="altBrowser" value="0" id='alt-no'><label for='alt-no'>No</label>
 						</p>
 						<p><span class='rdoText'><span class='red'>*</span> I have tried restarting my computer:</span>		<!-- extra info -->
-						<input type="radio" name="pcRestart" value="yes" id='res-yes'><label for='res-yes'>Yes</label>
-						<input type="radio" name="pcRestart" value="no" id='res-no'><label for='res-no'>No</label>
+						<input type="radio" name="pcRestart" value="1" id='res-yes'><label for='res-yes'>Yes</label>
+						<input type="radio" name="pcRestart" value="0" id='res-no'><label for='res-no'>No</label>
 						</p>
 						
 						<label for='description' class='setWidth' style='padding-top: 15px;'>

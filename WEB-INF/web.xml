@@ -46,6 +46,27 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>createReport</servlet-name>
+		<servlet-class>createReport</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>createReport</servlet-name>
+		<url-pattern>/createReport</url-pattern>
+	</servlet-mapping>
+	
+
+	<servlet>
+		<servlet-name>comment</servlet-name>
+		<servlet-class>comment</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>comment</servlet-name>
+		<url-pattern>/comment</url-pattern>
 	</servlet-mapping>
 	
 	<security-constraint>

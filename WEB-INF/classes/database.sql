@@ -14,6 +14,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users VALUES
+('admin','admin','System','Admin','ADMIN','ADMIN'),
 ('u080300','adminpass1','Bradley','Turner','c3259038@newcastle.edu.au','xx1'),
 ('u080201','adminpass2','Dean','Morton','c@newcaslte.edu.au','xx2'),
 ('u080033','humperdale','Hubert','Cumberdale','HC@gmail.com','xx3'),
@@ -51,6 +52,7 @@ CREATE TABLE user_roles (
 );
 
 INSERT INTO user_roles VALUES
+('admin','system_admin'),
 ('u080300','system_admin'),
 ('u080201','system_admin'),
 ('u080033','public_user'),
@@ -74,7 +76,7 @@ CREATE TABLE issue_reports (
 	category 			VARCHAR(25)		NOT NULL,
 	description 		VARCHAR(1000) 	NOT NULL,
 	reported 			TIMESTAMP 		NOT NULL 	DEFAULT	CURRENT_TIMESTAMP,
-	resolved 			TIMESTAMP,
+	resolved 			TIMESTAMP		NULL 		DEFAULT NULL,
 	resolution_details 	VARCHAR(1000),
 	
 	internal_access 	BOOLEAN 		NOT NULL 	DEFAULT FALSE,
@@ -90,7 +92,7 @@ CREATE TABLE issue_reports (
 INSERT INTO issue_reports(reporter_user_name, title, issue_state, category, description, reported, resolved, resolution_details, internal_access, alt_browser, pc_restart) VALUES
 ('u080033','cant connect to internet',		'new',						'network',	'help ive been trying to connect my phone to the wifi but its not connecting',						CURRENT_TIMESTAMP,						NULL,NULL,FALSE,TRUE,TRUE), 																						-- new
 ('u080049','word wont load corrupted file?','in-progress',				'software',	'was working on an assignment at home then came to uni and file wont load saying its corrupted?',	CURRENT_TIMESTAMP,						NULL,NULL,TRUE,FALSE,TRUE), 													-- in-progress
-('u080067','blue screen',					'waiting on third party',	'hardware',	'everytime i restart this computer it has a blue screen',											CURRENT_TIMESTAMP,						NULL,NULL,FALSE,FALSE,TRUE), 																									-- waiting on third party
+('u080067','blue screen',					'in-progress',				'hardware',	'everytime i restart this computer it has a blue screen',											CURRENT_TIMESTAMP,						NULL,NULL,FALSE,FALSE,TRUE), 																									-- waiting on third party
 ('u080067','too much spam!',				'completed',				'email',	'im constantly getting spam emails, is there anything i can do to stop it?',						TIMESTAMP('2018-05-05', '16:30:01'),	CURRENT_TIMESTAMP,'setup spam detection',TRUE,TRUE,TRUE), 									-- completed
 ('u080033','wrong account details',			'resolved',					'account',	'my first name is spelled wrong in my account',														TIMESTAMP('2018-05-03','16:31:01'),		CURRENT_TIMESTAMP,'reset users account details',FALSE,FALSE,FALSE), 												-- resolved
 ('u080049','cant open http:somesever',		'knowledgebase',			'network',	'been trying to connect to this website for ages',													TIMESTAMP('2018-04-25', '10:58:01'),	CURRENT_TIMESTAMP,'invalid server url',FALSE,TRUE,TRUE), 												-- kb

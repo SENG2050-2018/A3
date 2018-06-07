@@ -41,3 +41,4 @@ function closeDropDown(x){
 		setLastClick(x);
 	}
 }
+

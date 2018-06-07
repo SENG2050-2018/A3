@@ -30,6 +30,7 @@
 						<h1>Profile</h1>
 					</section>
 					<section>
+					
 						<h2><c:out value="${user.firstName}" /> <c:out value="${user.surname}" /> <span class='small'>( <c:out value="${user.userName}" /> )</span></h2>
 					
 						<p class='contactInfo'>
