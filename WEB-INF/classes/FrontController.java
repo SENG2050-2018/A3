@@ -66,6 +66,17 @@ public class FrontController extends HttpServlet
 					String src = request.getParameter("src");
 					String issue_id = request.getParameter("issue_id");
 					
+					
+					if (request.getParameter("issue_id") != null && request.getParameter("flag") != null)
+					{
+						Integer reportID = Integer.valueOf(request.getParameter("issue_id"));
+						String flag = request.getParameter("flag");
+						DA.updateReport(reportID, flag);
+					}
+					
+					
+					
+					
 					session.setAttribute("src", src);
 					session.setAttribute("report", DA.getReports(issue_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
@@ -88,11 +99,10 @@ public class FrontController extends HttpServlet
 						boolean altBrowser = (String) request.getParameter("altBrowser") == "1";
 						boolean pcRestart = (String) request.getParameter("pcRestart") == "1";
 						
-						// Create new issue report
-						System.out.println(title + ", " + category + ",\n" + description +  ",\n" + internal + ", " + altBrowser + ", " + pcRestart);
+						// Create new issue report.
 						DA.newReport(request.getUserPrincipal().getName(), title, category, description, internal, altBrowser, pcRestart);
 						
-						
+						//could set some session variable to let pop up a notification saying thank you for your feedback
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ReportIssue.jsp");
 						dispatcher.forward(request, response);
 					} 
@@ -113,7 +123,11 @@ public class FrontController extends HttpServlet
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/IssueBase.jsp");
 						dispatcher.forward(request, response);
 					}
-					break;
+				case "create_alert":
+					if (!request.isUserInRole("public_user")){
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/CreateAlert.jsp");
+						dispatcher.forward(request, response);
+					}
 				case "itservices":
 				default:
 					session.setAttribute("alerts", DA.getAlerts());

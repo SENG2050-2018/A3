@@ -30,6 +30,10 @@
 				<span class='fa fa-chevron-right'></span>
 				<span class='urlPart'>Issue Base</span>
 			</c:when>
+			<c:when test="${(parameter.key == 'id') && (parameter.value == 'create_alert')}" >
+				<span class='fa fa-chevron-right'></span>
+				<span class='urlPart'>Create Alert</span>
+			</c:when>
 			<c:when test="${(parameter.key == 'id') && (parameter.value == 'issue')}" >
 				<!-- choose statement to select correct link to the previous page by using url parameter (src) -->
 				<c:choose>

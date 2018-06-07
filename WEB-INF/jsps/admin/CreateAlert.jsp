@@ -9,7 +9,7 @@
 -->
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 	<head>
 		<%	//Prevents the user from reloading the page
@@ -40,30 +40,28 @@
 						<h1>Create Alert</h1>
 					</section>
 					<section>
-						hiddenUsername <br>
-						Alert title:<br>
-						alert description <br>
-						<br>
-						datetime of alert starttime: <br>
-						datetime of alert endtime: <br>
+						<label for='title'>Alert Title: </label>
+						<input type='text' name='title'>
+						
+						<label for 'description'>Alert Description: </label>
+						<textarea name='description'></textarea>
+						
+						<p>
+							<label for='startDate'>Start date of alert: </label><input type='date' name='startDate'>
+						</p>
+						
+						<p>
+							<label for='startTime'>Start time of alert: </label><input type='time' name='startTime'>
+						</p>
+						
+						<p>
+							<label for='endDate'>End date of alert: </label><input type='date' name='endDate'>
+						</p>
+						
+						<p>
+							<label for='endTime'>End time of alert: </label><input type='time' name='endTime'>
+						</p>
 					</section>
-					<ul class='grid links'>
-						<c:forEach var='report' items='${reports}'>
-							
-							<li class='cellSpan'>
-								<form action="${pageContext.servletContext.contextPath}/itservices?id=issue" method="post">
-									<input type='hidden' name='issue_id' value='${report.id}' />
-									<input type='hidden' name='src' value='ib' />
-									<button type='submit' class='mimicLink'>
-										<h2><c:out value="${report.title}" /></h2>
-										<p>State: <span class='inverse'><c:out value="${report.state}" /></span>Category: <span class='inverse'><c:out value="${report.category}" /></span></p>	
-										<p><c:out value="${report.description}" /></p>
-									</button>
-								</form>
-							</li>
-							
-						</c:forEach>
-					</ul>
 				</form>
 			</div>
 		</div>

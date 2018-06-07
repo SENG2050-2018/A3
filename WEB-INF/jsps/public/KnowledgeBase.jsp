@@ -44,6 +44,7 @@
 							Showing <c:out value="${fn:length(reports)}" /> results
 						</p>
 					</section>
+					
 					<ul class='grid links'>
 						<c:forEach var='report' items='${reports}'>
 							
@@ -62,6 +63,7 @@
 						</c:forEach>
 					</ul>
 				</div>
+				<div class='whitespace'></div>
 			</div>
 		</div>
 	</body>

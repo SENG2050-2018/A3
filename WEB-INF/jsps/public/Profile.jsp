@@ -98,6 +98,7 @@
 						<p>You do not have any previously reported issues.</p>
 					</c:if>
 				</div>
+				<div class='whitespace'></div>
 			</div>
 		</div>
 	</body>

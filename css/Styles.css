@@ -245,7 +245,13 @@ section > textarea {
 	font-weight: bold;
 }
 
+.smallWhitespace {
+	margin-bottom: 20px;
+}
 
+.whitespace {
+	margin-bottom: 50px;
+}
 
 
 

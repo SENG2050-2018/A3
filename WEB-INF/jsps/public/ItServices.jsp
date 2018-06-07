@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<title>IT Services</title>
@@ -50,16 +50,18 @@
 					</li>
 				</ul>
 				
-				<!-- Display for maintenance alerts, etc, set by system administrators -->
-				<h1 class='subtitle'>Alerts</h1>
-				<ul class='alerts grid links'>
-					<c:forEach var='alert' items='${alerts}'>
-						<li class='cellSpan'>
-							<h2><c:out value="${alert.title}" /></h2>
-							<p><c:out value="${alert.description}" /></p>
-						</li>
-					</c:forEach>	
-				</ul>
+				<c:if test="${fn:length(alerts) != 0}" >
+					<!-- Display for maintenance alerts, etc, set by system administrators -->
+					<h1 class='subtitle'>Alerts</h1>
+					<ul class='alerts grid links'>
+						<c:forEach var='alert' items='${alerts}'>
+							<li class='cellSpan'>
+								<h2><c:out value="${alert.title}" /></h2>
+								<p><c:out value="${alert.description}" /></p>
+							</li>
+						</c:forEach>	
+					</ul>
+				</c:if>
 			</div>
 		</div>
 		

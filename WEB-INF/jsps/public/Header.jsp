@@ -28,7 +28,7 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.servletContext.contextPath}/itservices?id=issue_base">View issues</a>
 					<a href="${pageContext.servletContext.contextPath}/itservices?id=view_user">Create / edit users</a>
-					<a href="#">Create new alerts</a>
+					<a href="${pageContext.servletContext.contextPath}/itservices?id=create_alert"">Create new alerts</a>
 				</div>
 			</div>
 		</c:if>
