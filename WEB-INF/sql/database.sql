@@ -1,5 +1,4 @@
 DROP TABLE alert, issue_comment, user_roles;
-DROP VIEW knowledge_base;
 DROP TABLE issue_reports, roles, users; 
 -- =================== TABLE CREATION ===================
 
