@@ -35,10 +35,12 @@
 					</section>
 					<section>
 						<p>
-							<b>Issue State:</b> <c:out value="${report.state}" /> <br>
-							<b>Category:</b> <c:out value="${report.category}" /> <br>
-							<b>Submitted by User:</b> <c:out value="${report.reporter}" /> <br>
-							<b>Lodged: </b><c:out value="${report.reported}" />
+							<p><b>Issue State:</b> <span class="inverse"><c:out value="${report.state}" /></span></p>
+							<b>Category:</b> <span class="inverse"><c:out value="${report.category}" /></span> <br>
+							<p>
+								<b>Submitted by User:</b> <c:out value="${report.reporter}" /> <br>
+								<b>Lodged: </b><c:out value="${report.reported}" />
+							</p>
 						</p>
 					</section>
 					<section>
@@ -86,11 +88,11 @@
 								</c:if>
 								<c:if test="${report.state == 'Resolved'}" > 
 									<input type='hidden' name='flag' value='knowledgebase'>
-									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px' >Mark KnowledgeBase</button></h4>
+									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px; color:white; padding: 10px 15px; text-align:center;' >Mark KnowledgeBase</button></h4>
 								</c:if>
 								<c:if test="${report.state == 'Knowledgebase'}" > 
 									<input type='hidden' name='flag' value='resolved'>
-									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px' >Remove from KnowledgeBase</button></h4>
+									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px; color:white; padding: 10px 15px; text-align:center;' >Remove from KnowledgeBase</button></h4>
 								</c:if>
 							</form>
 						</section>
@@ -104,13 +106,13 @@
 									<input type='hidden' name='issue_id' value='${report.id}'>
 									<input type='hidden' name='src' value='${sessionScope.src}'>
 									<input type='hidden' name='flag' value='resolved'>
-									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Resolve the issue?</button></h4>
+									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px; color:white; padding: 10px 15px; text-align:center;'>Resolve the issue?</button></h4>
 								</form>
 								<form action="itservices?id=issue" method="post">
 									<input type='hidden' name='issue_id' value='${report.id}'>
 									<input type='hidden' name='src' value='${sessionScope.src}'>
 									<input type='hidden' name='flag' value='in-progress'>
-									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Issue still not fixed?</button></h4>
+									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px; color:white; padding: 10px 15px; text-align:center;'>Issue still not fixed?</button></h4>
 								</form>
 							</section>
 						</c:if>
@@ -133,8 +135,8 @@
 								<input type='hidden' name='src' value='${sessionScope.src}'>
 								<textarea name='comment' style='width:100%;height: 100px;'></textarea>
 								<br>
-								<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Submit</button>
-								<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Clear</button>
+								<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Submit</button>
+								<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Clear</button>
 							</form>
 						</c:if>
 					</section>

@@ -35,34 +35,49 @@
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
-				<form class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
-					<section class='title'>
-						<h1>Create Alert</h1>
-					</section>
-					<section>
-						<label for='title'>Alert Title: </label>
-						<input type='text' name='title'>
-						
-						<label for 'description'>Alert Description: </label>
-						<textarea name='description'></textarea>
-						
-						<p>
-							<label for='startDate'>Start date of alert: </label><input type='date' name='startDate'>
-						</p>
-						
-						<p>
-							<label for='startTime'>Start time of alert: </label><input type='time' name='startTime'>
-						</p>
-						
-						<p>
-							<label for='endDate'>End date of alert: </label><input type='date' name='endDate'>
-						</p>
-						
-						<p>
-							<label for='endTime'>End time of alert: </label><input type='time' name='endTime'>
-						</p>
-					</section>
-					<button type='submit'>Create Alert!</button>
+				<form class='centered form' action='itservices?id=create_alert' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+					<c:choose>
+						<c:when test="${sessionScope.received == true}">
+							<section class='title'> <!-- Title -->
+								<h1>Create Alert</h1>
+								<h2>Alert successfully created!</h2>
+								<c:remove var="received" scope="session" />
+								<a href="${pageContext.servletContext.contextPath}/itservices" class='mimicBtn' style='color:white; padding: 15px 15px 15px 15px; width:calc(100% - 30px);'>Click here to return back to the home page.</a>
+							</section>
+						</c:when>
+						<c:otherwise>
+							<section class='title'>
+								<h1>Create Alert</h1>
+							</section>
+							<section>
+								<input type='hidden' name='sent' value="true">
+							
+								<label for='title'>Alert Title: </label>
+								<input type='text' name='title'>
+								
+								<label for 'description'>Alert Description: </label>
+								<textarea name='description'></textarea>
+								
+								<p>
+									<label for='startDate'>Start date of alert: </label><input type='date' name='startDate'>
+								</p>
+								
+								<p>
+									<label for='startTime'>Start time of alert: </label><input type='time' name='startTime'>
+								</p>
+								
+								<p>
+									<label for='endDate'>End date of alert: </label><input type='date' name='endDate'>
+								</p>
+								
+								<p>
+									<label for='endTime'>End time of alert: </label><input type='time' name='endTime'>
+								</p>
+							</section>
+							<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Create Alert!</button>
+							<button type='clear' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Clear</button>
+						</c:otherwise>
+					</c:choose>
 				</form>
 			</div>
 		</div>

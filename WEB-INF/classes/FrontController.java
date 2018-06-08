@@ -16,8 +16,6 @@ public class FrontController extends HttpServlet
 	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
-		String searchBox = request.getParameter("searchBox");
-
 	}
 	
 	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException 
@@ -72,6 +70,7 @@ public class FrontController extends HttpServlet
 						dispatcher.forward(request, response);
 					}
 					if (request.getParameter("comment") != null){
+						
 						// Adds the new comment to the database.
 						DA.newComment(request.getParameter("issue_id"), request.getUserPrincipal().getName(), request.getParameter("comment"));
 					}
@@ -79,13 +78,13 @@ public class FrontController extends HttpServlet
 					String issue_id = request.getParameter("issue_id");
 					
 					// Code block to update the issue_state (progress the workflow) of the issue_report.
-					if (request.getParameter("issue_id") != null && request.getParameter("flag") != null && request.getParameter("resolutionDetails") != null){
+					if (request.getParameter("issue_id") != null && request.getParameter("flag") != null){
 						Integer reportID = Integer.valueOf(request.getParameter("issue_id"));
 						String flag = request.getParameter("flag");
 						String resolutionDetails = request.getParameter("resolutionDetails");
 						
 						if (!flag.equals("")){
-							if (flag.equals("completed")){
+							if (flag.equals("completed") && request.getParameter("resolutionDetails") != null){
 								DA.updateReport(reportID, flag, resolutionDetails);
 							}
 							else {
@@ -156,19 +155,23 @@ public class FrontController extends HttpServlet
 					
 				case "create_alert":
 					if (!request.isUserInRole("public_user")){
+						
 						// If null value detected, redirect to home page.
-						if (request.getParameter("startDate") == null || request.getParameter("startTime") == null || request.getParameter("endDate") == null || request.getParameter("endTime") == null || request.getParameter("title") == null || request.getParameter("description") == null) {
-							session.setAttribute("alerts", DA.getAlerts());
-							dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/ItServices.jsp");
-							dispatcher.forward(request, response);
-						}
-						else {
-							if (request.getParameter("startDate").equals("") || request.getParameter("startTime").equals("") || request.getParameter("endDate").equals("") || request.getParameter("endTime").equals("") || request.getParameter("title").equals("") || request.getParameter("description").equals("")) {}
+						sent = request.getParameter("sent");
+						if (sent != null) {
+							if (request.getParameter("startDate") == null || request.getParameter("startTime") == null || request.getParameter("endDate") == null || request.getParameter("endTime") == null || request.getParameter("title") == null || request.getParameter("description") == null) {
+								dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/CreateAlert.jsp");
+								dispatcher.forward(request, response);
+							}
 							else {
-								String start_datetime = request.getParameter("startDate") + " " + request.getParameter("startTime") + ":00";
-								String end_datetime = request.getParameter("endDate") + " " + request.getParameter("endTime") + ":00";
-							
-								DA.newAlert(request.getUserPrincipal().getName(),request.getParameter("title"),request.getParameter("description"), start_datetime, end_datetime);
+								if (request.getParameter("startDate").equals("") || request.getParameter("startTime").equals("") || request.getParameter("endDate").equals("") || request.getParameter("endTime").equals("") || request.getParameter("title").equals("") || request.getParameter("description").equals("")) {}
+								else {
+									String start_datetime = request.getParameter("startDate") + " " + request.getParameter("startTime") + ":00";
+									String end_datetime = request.getParameter("endDate") + " " + request.getParameter("endTime") + ":00";
+								
+									DA.newAlert(request.getUserPrincipal().getName(),request.getParameter("title"),request.getParameter("description"), start_datetime, end_datetime);
+									session.setAttribute("received", sent);
+								}
 							}
 						}
 						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/admin/CreateAlert.jsp");

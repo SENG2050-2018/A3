@@ -22,7 +22,7 @@
 				<div class='titleWrapper'>
 					<h1 class='pageTitle'><span style='color:white'>IT</span> SERVICES</h1>
 					<div class='search'>
-						<form action="${pageContext.servletContext.contextPath}/itservices?id=searchKnowledge" id='searchKnowledge' method="post">
+						<form action="${pageContext.servletContext.contextPath}/?id=searchKnowledge" id='searchKnowledge' method="post">
 							<input name='searchBox' type='text' placeholder='How can we help?' class='searchBox'><button type='submit' class='searchBtn'><span class='fa fa-search'></span></button>
 						</form>
 					</div>

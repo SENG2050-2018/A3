@@ -86,8 +86,9 @@
 								<textarea name='description' required></textarea>
 							</section>
 							
-							<button type='reset'>Clear</button>
-							<button type='submit'>Submit</button>
+							<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Submit</button>
+							<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px; color:white; padding: 10px 15px; text-align:center;'>Clear</button>
+							
 
 						</c:otherwise>
 					</c:choose>
