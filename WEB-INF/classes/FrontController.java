@@ -84,9 +84,17 @@ public class FrontController extends HttpServlet
 					{
 						Integer reportID = Integer.valueOf(request.getParameter("issue_id"));
 						String flag = request.getParameter("flag");
+						String resolutionDetails = request.getParameter("resolutionDetails");
+						
 						if (!flag.equals("")){
-							DA.updateReport(reportID, flag);
+							if (flag.equals("completed")){
+								DA.updateReport(reportID, flag, resolutionDetails);
+							}
+							else {
+								DA.updateReport(reportID, flag);
+							}
 						}
+						request.removeAttribute("flag");
 					}
 					
 					

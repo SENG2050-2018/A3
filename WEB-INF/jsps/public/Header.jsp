@@ -50,7 +50,7 @@
 				</c:if>
 			</button>
 			<div class="dropdown-content">
-				<c:forEach var ='notice' items='${notices}'>
+				<c:forEach var ='notice' items='${notices}' begin="0" end="4" varStatus="status">
 					<form action="itservices?id=issue" method="post">
 						<input type='hidden' name='issue_id' value='${notice.id}' />
 						<input type='hidden' name='src' value='profile' />

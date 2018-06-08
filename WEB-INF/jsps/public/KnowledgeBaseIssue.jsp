@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 	<head>
 		<%	//Prevents the user from reloading the page
@@ -38,6 +38,7 @@
 							<b>Issue State:</b> <c:out value="${report.state}" /> <br>
 							<b>Category:</b> <c:out value="${report.category}" /> <br>
 							<b>Submitted by User:</b> <c:out value="${report.reporter}" /> <br>
+							<b>Lodged: </b><c:out value="${report.reported}" />
 						</p>
 					</section>
 					<section>
@@ -51,7 +52,11 @@
 					</section>
 					<section>
 						<p>
-							<b>Resolved: </b>
+							<b>Resolved: 
+								<c:if test="${report.state == 'resolved' || report.state == 'completed' || report.state == 'knowledgebase'}" >
+									<c:out value="${report.resolved}" /> 
+								</c:if>
+							</b>
 						</p>
 						<p>
 							<b>Resolution Details: <c:out value="${report.resolution}" /></b> <br>
@@ -71,7 +76,9 @@
 								</c:if>
 								<c:if test="${report.state == 'in-progress'}" > 
 									<input type='hidden' name='flag' value='completed'>
-									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Mark Completed</button></h4>
+									<h4>Admin:</h4>
+									<label for='resolutionDetails'>How to resolve the issue:</label><textarea name='resolutionDetails' style='width:100%;height: 100px;' required></textarea>
+									<h4> <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Mark Completed</button></h4>
 								</c:if>
 								<c:if test="${report.state == 'completed'}" > 
 									<h4>Admin: Marked complete. Waiting on reporter.</h4>
@@ -108,25 +115,27 @@
 						</c:if>
 					</c:if>
 					<section>
-						<h2>Comments</h2>
-						<c:forEach var ='comment' items='${comments}'>
-							<div>
-								<h4 style="margin-bottom: 5px;"><u><c:out value="${comment.commenterUserName}" /></u>:</h4>
-								<c:out value="${comment.userComment}" />
-							</div>
-						</c:forEach>
-						<!-- Need to display all the comments here where report.issue_id = comment.issue_id -->
-
-					
-						<h2> Add Comment </h2>
-						<form action="itservices?id=issue" method="post">
-							<input type='hidden' name='issue_id' value='${report.id}' />
-							<input type='hidden' name='user_id' value='${report.reporter}' />
-							<textarea name='comment' style='width:100%;height: 100px;'></textarea>
-							<br>
-							<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Submit</button>
-							<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Clear</button>
-						</form>
+						<c:if test="${fn:length(comments) != 0}">
+							<h2>Comments</h2>
+							<c:forEach var ='comment' items='${comments}'>
+								<div>
+									<h4 style="margin-bottom: 5px;"><u><c:out value="${comment.commenterUserName}" /></u>:</h4>
+									<c:out value="${comment.userComment}" />
+								</div>
+							</c:forEach>
+						</c:if>
+						<c:if test="${!(report.state == 'resolved' || report.state == 'knowledgebase')}" >
+							<h2> Add Comment </h2>
+							<form action="itservices?id=issue" method="post">
+								<input type='hidden' name='issue_id' value='${report.id}' />
+								<input type='hidden' name='user_id' value='${report.reporter}' />
+								<input type='hidden' name='src' value='${sessionScope.src}'>
+								<textarea name='comment' style='width:100%;height: 100px;'></textarea>
+								<br>
+								<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Submit</button>
+								<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Clear</button>
+							</form>
+						</c:if>
 					</section>
 				</div>
 				

@@ -6,6 +6,7 @@ import javax.naming.*;
 import java.util.*;
 import java.io.Serializable;
 import beans.*;
+import java.text.SimpleDateFormat;
 
 public class DataAccess 
 {
@@ -290,8 +291,21 @@ public class DataAccess
 					temp.setState(rs.getString(4));
 					temp.setCategory(rs.getString(5));
 					temp.setDescription(rs.getString(6));
-					temp.setReported(rs.getString(7));
-					temp.setResolved(rs.getString(8));
+					
+					Timestamp dbSqlTimestamp = rs.getTimestamp(7);
+					if (dbSqlTimestamp != null){
+						String formattedDate = new SimpleDateFormat("dd/MM/yyyy  h:mm:ss a").format(dbSqlTimestamp);
+						temp.setReported(formattedDate);
+					}
+					
+					dbSqlTimestamp = rs.getTimestamp(8);
+					if (dbSqlTimestamp != null){
+						String formattedDate = new SimpleDateFormat("dd/MM/yyyy  h:mm:ss a").format(dbSqlTimestamp);
+						temp.setResolved(formattedDate);
+					}
+					
+					
+					
 					temp.setResolution(rs.getString(9));
 					temp.setInternalAccess(rs.getString(10));
 					temp.setAltBrowser(rs.getString(11));
@@ -351,8 +365,19 @@ public class DataAccess
 				temp.setState(rs.getString(4));
 				temp.setCategory(rs.getString(5));
 				temp.setDescription(rs.getString(6));
-				temp.setReported(rs.getString(7));
-				temp.setResolved(rs.getString(8));
+				
+				Timestamp dbSqlTimestamp = rs.getTimestamp(7);
+				if (dbSqlTimestamp != null){
+					String formattedDate = new SimpleDateFormat("dd/MM/yyyy  h:mm:ss a").format(dbSqlTimestamp);
+					temp.setReported(formattedDate);
+				}
+				
+				dbSqlTimestamp = rs.getTimestamp(8);
+				if (dbSqlTimestamp != null){
+					String formattedDate = new SimpleDateFormat("dd/MM/yyyy  h:mm:ss a").format(dbSqlTimestamp);
+					temp.setResolved(formattedDate);
+				}
+				
 				temp.setResolution(rs.getString(9));
 				temp.setInternalAccess(rs.getString(10));
 				temp.setAltBrowser(rs.getString(11));
@@ -509,6 +534,60 @@ public class DataAccess
 		}
 	}
 	
+	/** + updateReport(report_id, newIssueState)
+	*	Preconditions: 	report_id and newIssueState cannot be null. 
+	*					newIssueState has to exist in {'new','in-progress','completed','resolved','knowledgebase'}.
+	*	Postconditions:	Accesses the MySQL Database via a prepared statement and updates the row specified by report_id,
+	*					to change its issue_state to newIssueState.
+	*/
+	public void updateReport(int report_id, String newIssueState, String resolutionDetails) {
+		String update = "UPDATE issue_reports SET issue_state = ?, resolution_details = ?, resolved = CURRENT_TIMESTAMP() WHERE issue_id = ?"; 
+		
+		Context ctx = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(update);
+			stmt.setString(1, newIssueState);
+			stmt.setString(2, resolutionDetails);
+			stmt.setInt(3, report_id);
+			stmt.execute();
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				stmt.close();
+				conn.close();
+				ctx.close();
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
 	
 	
 
@@ -626,4 +705,5 @@ public class DataAccess
 			}
 		}
 	}
+
 }

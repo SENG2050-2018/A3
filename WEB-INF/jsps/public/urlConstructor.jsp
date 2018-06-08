@@ -51,7 +51,7 @@
 					</c:when>
 				</c:choose>
 				
-				<span class='fa fa-chevron-right largeScreenOnly'></span>
+				<span class='fa fa-chevron-right largeScreenOnlyInline'></span>
 				<span class='urlPart largeScreenOnlyInline'><c:out value="${report.title}" /></span> <!-- edit this later -->
 			</c:when>
 		</c:choose>

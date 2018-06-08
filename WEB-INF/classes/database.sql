@@ -14,7 +14,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users VALUES
-('admin','admin','System','Admin','ADMIN','ADMIN'),
+('Administrator','admin','System','Admin','ADMIN','ADMIN'),
 ('u080300','adminpass1','Bradley','Turner','c3259038@newcastle.edu.au','xx1'),
 ('u080201','adminpass2','Dean','Morton','c@newcaslte.edu.au','xx2'),
 ('u080033','humperdale','Hubert','Cumberdale','HC@gmail.com','xx3'),
@@ -52,7 +52,7 @@ CREATE TABLE user_roles (
 );
 
 INSERT INTO user_roles VALUES
-('admin','system_admin'),
+('Administrator','system_admin'),
 ('u080300','system_admin'),
 ('u080201','system_admin'),
 ('u080033','public_user'),

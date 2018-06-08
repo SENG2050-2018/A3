@@ -25,7 +25,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 		
 		<script src='${pageContext.servletContext.contextPath}/js/dropdown-mobile-support.js'></script>
-		<script src='${pageContext.servletContext.contextPath}/js/multiPage.js'></script>
+		<!--<script src='${pageContext.servletContext.contextPath}/js/multiPage.js'></script>-->
 	</head>
 	<body>
 		<div class='flex-container'>
@@ -37,7 +37,7 @@
 			
 			<!-- Main page image with searchbar overlay -->
 			<div class='flex-row'>
-				<div class='centered form' action='' method='post'> <!-- Method should be post so data sent to the server is concealed -->
+				<div class='centered form' method='post'> <!-- Method should be post so data sent to the server is concealed -->
 					<section class='title'>
 						<h1>Issues</h1>
 					</section>
@@ -70,8 +70,8 @@
 					</div>
 					<div class="smallWhitespace"></div>
 					<button class="prev" style="vertical-align:middle"><span>Previous Page </span></button>
-					<button class="next" style="vertical-align:middle"><span>Next Page </span></button>
-					<script src='${pageContext.servletContext.contextPath}/js/multiPage.js'></script>
+					<button class="next" style="vertical-align:middle"><span>Next Page </span></button> 
+					<script src='${pageContext.servletContext.contextPath}/js/multiPage.js'></script> 
 				</div>
 				<div class="smallWhitespace"></div>
 			</div>
