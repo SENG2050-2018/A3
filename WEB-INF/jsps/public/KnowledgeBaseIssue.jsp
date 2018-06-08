@@ -35,22 +35,26 @@
 					</section>
 					<section>
 						<p>
+							<b>Issue State:</b> <c:out value="${report.state}" /> <br>
 							<b>Category:</b> <c:out value="${report.category}" /> <br>
 							<b>Submitted by User:</b> <c:out value="${report.reporter}" /> <br>
 						</p>
 					</section>
 					<section>
-					Able to access internal websites: <c:out value="${report.internalAccess}" /> </br>
-					Tried using an alternate browser: <c:out value="${report.altBrowser}" /> </br>
-					Tried restarting my computer: <c:out value="${report.pcRestart}" /> </br> </br>
+						Able to access internal websites: <c:out value="${report.internalAccess}" /> </br>
+						Tried using an alternate browser: <c:out value="${report.altBrowser}" /> </br>
+						Tried restarting my computer: <c:out value="${report.pcRestart}" /> </br> </br>
 					
-					</section>
-					<section>
 						<p>
 							Description: <c:out value="${report.description}" /> 
 						</p>
+					</section>
+					<section>
 						<p>
-							<b>Resolution: <c:out value="${report.resolution}" /></b> <br>
+							<b>Resolved: </b>
+						</p>
+						<p>
+							<b>Resolution Details: <c:out value="${report.resolution}" /></b> <br>
 						</p>
 					</section>
 					
@@ -86,44 +90,42 @@
 					
 					<!-- Section for user who reported the issue to accelerate the workflow -->
 					<c:if test="${report.reporter == user.userName}" >
-						<section>
-							<form action="itservices?id=issue" method="post">
-								<input type='hidden' name='issue_id' value='${report.id}'>
-								<input type='hidden' name='src' value='${sessionScope.src}'>
-								
-								<c:if test="${report.state == 'completed'}" > 
+						<c:if test="${report.state == 'completed'}" > 
+							<section>
+								<form action="itservices?id=issue" method="post">
+									<input type='hidden' name='issue_id' value='${report.id}'>
+									<input type='hidden' name='src' value='${sessionScope.src}'>
 									<input type='hidden' name='flag' value='resolved'>
 									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Resolve the issue?</button></h4>
-								</c:if>
-							</form>
-						</section>
+								</form>
+								<form action="itservices?id=issue" method="post">
+									<input type='hidden' name='issue_id' value='${report.id}'>
+									<input type='hidden' name='src' value='${sessionScope.src}'>
+									<input type='hidden' name='flag' value='in-progress'>
+									<h4><button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Issue still not fixed?</button></h4>
+								</form>
+							</section>
+						</c:if>
 					</c:if>
 					<section>
-						<h4>Comments</h4>
-						<c:forEach var ='CommentBean' items='${CommentBean}'>
+						<h2>Comments</h2>
+						<c:forEach var ='comment' items='${comments}'>
 							<div>
-								<h2>User Name: <c:out value="${User.userName}" /></h2>
-								
-								First Name : <c:out value="${User.firstName}" />
-								
-								Last Name: <c:out value="${User.surname}" />
-								
-								Email: <c:out value="${User.email}" />
-								
-								Phone Number: <c:out value="${User.contactNumber}" />
+								<h4 style="margin-bottom: 5px;"><u><c:out value="${comment.commenterUserName}" /></u>:</h4>
+								<c:out value="${comment.userComment}" />
 							</div>
 						</c:forEach>
 						<!-- Need to display all the comments here where report.issue_id = comment.issue_id -->
 
 					
-						<p> Add Comment </p>
-						<form action="comment" method="post">
+						<h2> Add Comment </h2>
+						<form action="itservices?id=issue" method="post">
 							<input type='hidden' name='issue_id' value='${report.id}' />
 							<input type='hidden' name='user_id' value='${report.reporter}' />
-							<textarea name='comment' rows="4" cols="50"></textarea>
-							</br>
-							<button type='reset'>Clear</button>
-							<button type='submit'>Submit</button>
+							<textarea name='comment' style='width:100%;height: 100px;'></textarea>
+							<br>
+							<button type='submit' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Submit</button>
+							<button type='reset' class='mimicBtn' style='font-size:var(--stdFont); max-width: 150px;'>Clear</button>
 						</form>
 					</section>
 				</div>

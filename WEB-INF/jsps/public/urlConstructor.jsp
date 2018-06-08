@@ -8,7 +8,7 @@
 		provides a dynamic representation of the current context and provides links to previous parent pages
 -->
 
-<div class='centered spaced' >
+<div class='centered spaced' style="overflow:hidden;">
 	<a class='urlPart' href='${pageContext.servletContext.contextPath}/itservices'>Home</a>
 	
 	<c:forEach var="parameter" items="${param}" >
@@ -51,9 +51,10 @@
 					</c:when>
 				</c:choose>
 				
-				<span class='fa fa-chevron-right'></span>
-				<span class='urlPart'><c:out value="${report.title}" /></span> <!-- edit this later -->
+				<span class='fa fa-chevron-right largeScreenOnly'></span>
+				<span class='urlPart largeScreenOnlyInline'><c:out value="${report.title}" /></span> <!-- edit this later -->
 			</c:when>
 		</c:choose>
 	</c:forEach>
+	
 </div>

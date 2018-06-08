@@ -33,8 +33,11 @@ public class FrontController extends HttpServlet
 		//user should be set for all pages.
 		session.setAttribute("user", DA.getUsers(request.getUserPrincipal().getName()));
 		
-		//isStaff should be set for all pages so header knows when to display administrator pages to the client.
+		//isStaff should be set for all pages so header knows when to display staff pages to the client.
 		session.setAttribute("isStaff", String.valueOf(!request.isUserInRole("public_user")));
+
+		//isAdmin should be set for all pages so header knows when to display administrator pages to the client.
+		session.setAttribute("isAdmin", String.valueOf(request.isUserInRole("system_admin")));
 		
 		//notices should be set for all pages so header can display relevant notices to the client.
 		List<Report> reports = DA.getReports("userNotices", request.getUserPrincipal().getName());
@@ -63,26 +66,36 @@ public class FrontController extends HttpServlet
 					//dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/searchKnowledgeBase.jsp");
 					//dispatcher.forward(request, response);	
 				case "issue":
+					// Code block to guard against reloading the webpage from an expired session.
+					if (request.getParameter("issue_id") == null)
+					{
+						dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBase.jsp");
+						dispatcher.forward(request, response);
+					}
+					if (request.getParameter("comment") != null){
+						// Adds the new comment to the database.
+						DA.newComment(request.getParameter("issue_id"), request.getUserPrincipal().getName(), request.getParameter("comment"));
+					}
 					String src = request.getParameter("src");
 					String issue_id = request.getParameter("issue_id");
 					
-					
+					// Code block to update the issue_state (progress the workflow) of the issue_report.
 					if (request.getParameter("issue_id") != null && request.getParameter("flag") != null)
 					{
 						Integer reportID = Integer.valueOf(request.getParameter("issue_id"));
 						String flag = request.getParameter("flag");
-						DA.updateReport(reportID, flag);
+						if (!flag.equals("")){
+							DA.updateReport(reportID, flag);
+						}
 					}
-					
-					
 					
 					
 					session.setAttribute("src", src);
 					session.setAttribute("report", DA.getReports(issue_id));
+					session.setAttribute("comments", DA.retrieveComments(issue_id));
 					dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/public/KnowledgeBaseIssue.jsp");
 					dispatcher.forward(request, response);
-
-				
+					
 				case "report_issue":
 					String sent = request.getParameter("sent");
 					if (sent != null) {

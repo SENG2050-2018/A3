@@ -94,9 +94,11 @@ body {
 	padding-left: 0;
 }
 
-.largeScreenOnly {
+.largeScreenOnly, .largeScreenOnlyInline {
 	display: none;
 }
+
+
 
 /* Styling for anchor tags to mimic html button elements */
 .mimicBtn {
@@ -339,6 +341,10 @@ section > textarea {
 	
 	.largeScreenOnly {
 		display: block;
+	}
+	
+	.largeScreenOnlyInline {
+		display: inline;
 	}
 	
 	.cellSpan {

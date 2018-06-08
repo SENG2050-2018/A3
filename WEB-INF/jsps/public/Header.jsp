@@ -26,9 +26,11 @@
 			<div class='dropdown' >
 				<button class='dropBtn largeScreenOnly' onclick="closeDropDown(1)">Admin</button>
 				<div class="dropdown-content">
-					<a href="${pageContext.servletContext.contextPath}/itservices?id=issue_base">View issues</a>
-					<a href="${pageContext.servletContext.contextPath}/itservices?id=view_user">Create / edit users</a>
-					<a href="${pageContext.servletContext.contextPath}/itservices?id=create_alert"">Create new alerts</a>
+					<a href="${pageContext.servletContext.contextPath}/itservices?id=issue_base">View Issues</a>
+					<c:if test="${sessionScope.isAdmin == true}" >
+						<a href="${pageContext.servletContext.contextPath}/itservices?id=view_user">Create / Edit Users</a>
+						<a href="${pageContext.servletContext.contextPath}/itservices?id=create_alert">Create New Alerts</a>
+					</c:if>
 				</div>
 			</div>
 		</c:if>
@@ -48,8 +50,13 @@
 				</c:if>
 			</button>
 			<div class="dropdown-content">
-				<a href="#">dynamic creation</a>
-				<a href="#">dynamic creation</a>
+				<c:forEach var ='notice' items='${notices}'>
+					<form action="itservices?id=issue" method="post">
+						<input type='hidden' name='issue_id' value='${notice.id}' />
+						<input type='hidden' name='src' value='profile' />
+						<button type='submit'><c:out value="${notice.title}" /></button>
+					</form>
+				</c:forEach>
 			</div>
 		</div>
 		

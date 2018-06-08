@@ -75,10 +75,15 @@ public class DataAccess
 	
 	public void removeAlert(/*alert_id*/) {}
 	
-	public void setNewAlert(String creater_username, String title, String description /**,start_time, end_time*/) {
+	public void newAlert(String creater_username, String title, String description /**,start_time, end_time*/) {
 		
 	}
 	
+
+
+
+
+
 	/** + getUsers(user_name)
 	*	Preconditions: user_name cannot be null and must be a valid user_name.
 	*	Postconditions: Returns a specific beans.User object from the database specified by user_name.
@@ -219,6 +224,8 @@ public class DataAccess
 	}}
 	
 	
+
+
 	
 	/** + getReports(selector, userId)
 	*	Preconditions: selector cannot be null, and has to be = to either "all", "knowledgebase" or "userNotices".
@@ -389,79 +396,11 @@ public class DataAccess
 		}
 	}
 	
-	
-	// TESTING search bar
-	/**
-	public Report getSearch(String report_title){//change to prepared statement
-		
-		String query = "SELECT * FROM issue_reports WHERE CONTAINS(issue_reports.title, "+ report_title +")";
-		Report temp = new Report();
-		
-		Context ctx = null;
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		try
-		{
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
-			conn = ds.getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
-			while (rs.next())
-			{
-				temp.setId(rs.getString(1));
-				temp.setReporter(rs.getString(2));
-				temp.setTitle(rs.getString(3));
-				temp.setCategory(rs.getString(5));
-				temp.setDescription(rs.getString(6));
-				temp.setReported(rs.getString(7));
-				temp.setResolved(rs.getString(8));
-				temp.setResolution(rs.getString(9));
-				temp.setInternalAccess(rs.getString(10));
-				temp.setAltBrowser(rs.getString(11));
-				temp.setPcRestart(rs.getString(12));
-			}
-			
-			
-		}
-		catch (NamingException e)
-		{
-			e.printStackTrace();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				ctx.close();
-				
-				//finally return the list
-				return temp;
-			}
-			catch (NamingException e)
-			{
-				e.printStackTrace();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			return null;
-		}
-	}
+	/** + newReport(reporter, title, category, description, ia, ab, pr)
+	*	Preconditions: All parameters need to be initialised and non null.
+	*	Postconditions:	Accesses the MySQL Database via a prepared statement that creates a new issue_report row
+	*					containing all sanitised parameters.
 	*/
-	
-	
 	public void newReport(String reporter, String title, String category, String description, boolean ia, boolean ab, boolean pr)	{
 		String insert = "INSERT INTO issue_reports (reporter_user_name, title, category, description, internal_access, alt_browser, pc_restart) "; 
 		insert += "VALUES (?,?,?,?,?,?,?)";
@@ -517,6 +456,12 @@ public class DataAccess
 		}
 	}
 	
+	/** + updateReport(report_id, newIssueState)
+	*	Preconditions: 	report_id and newIssueState cannot be null. 
+	*					newIssueState has to exist in {'new','in-progress','completed','resolved','knowledgebase'}.
+	*	Postconditions:	Accesses the MySQL Database via a prepared statement and updates the row specified by report_id,
+	*					to change its issue_state to newIssueState.
+	*/
 	public void updateReport(int report_id, String newIssueState) {
 		String update = "UPDATE issue_reports SET issue_state = ? WHERE issue_id = ?"; 
 		
@@ -566,4 +511,119 @@ public class DataAccess
 	
 	
 	
+
+
+	/** + retrieveComments(report_id)
+	*	Preconditions: report_id cannot be null and has to be a valid report_id.
+	*	Postconditions:	Returns a list of beans.Comment objects with issue_comment.issue_id matching report_id.
+	*/
+	public List<Comment> retrieveComments(String report_id){
+		String query = "SELECT * FROM issue_comment WHERE issue_comment.issue_id = ?";
+		List<Comment> comments = new LinkedList<>();
+		
+		// Declare variables for the database access.
+		Context ctx = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			// Set variables for database access.
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, report_id);
+			rs = stmt.executeQuery();
+
+			// Loop over result set and add results to Report objects (JavaBean) and append to list for output.
+			while (rs.next())
+			{
+				Comment temp = new Comment();
+				
+				temp.setIssueId(rs.getString(2));
+				temp.setCommenterUserName(rs.getString(3));
+				temp.setUserComment(rs.getString(4));
+				comments.add(temp);
+			}
+		}
+		catch (NamingException e)		{e.printStackTrace();}
+		catch (SQLException e)			{e.printStackTrace();}
+		finally
+		{
+			// Try block in case variables werent created successfully.
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				ctx.close();
+				
+				// Finally return the output list.
+				return comments;
+			}
+			catch (NamingException e)	{e.printStackTrace();}
+			catch (SQLException e)		{e.printStackTrace();}
+			catch (Exception e)			{e.printStackTrace();}
+			
+			// If all else fails return null.
+			return null;
+		}
+	}
+	
+	/** + newComment(report_id, user_id, comment)
+	*	Preconditions: All parameters need to be initialised and non null.
+	*	Postconditions:	Accesses the MySQL Database via a prepared statement that creates a new issue_comment row
+	*					containing all sanitised parameters.
+	*/
+	public void newComment(String report_id, String user_id, String comment){
+		String insert = "INSERT INTO issue_comment (issue_id, commenter_user_name, user_comment) "; 
+		insert += "VALUES (?,?,?)";
+		
+		Context ctx = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try
+		{
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(insert);
+			stmt.setString(1, report_id);
+			stmt.setString(2, user_id);
+			stmt.setString(3, comment);
+			
+			
+			stmt.execute();
+			
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				stmt.close();
+				conn.close();
+				ctx.close();
+			}
+			catch (NamingException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 }

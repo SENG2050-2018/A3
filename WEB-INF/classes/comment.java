@@ -1,70 +1,58 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.sql.*;
-import javax.sql.*;
-import javax.naming.*;
-public class comment extends HttpServlet
+/**
+	*	@FILE_NAME: Java Bean			
+	*	@DEVELOPERS: Dean		
+	*	@BRIEF_DESCRIPTION: Java Bean for all the comments created
+	*/
+	
+package beans;
+
+import java.io.Serializable;
+public class Comment implements Serializable
 {
-	public void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
-	{
+	private String issueId, commenterUserName, userComment;
 	
-		Connection conn = null;
-		Statement stmt = null;
-
-		Context ctx = null;
-		try{
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/SENG2050_2018");
-			conn = ds.getConnection();
-			stmt = conn.createStatement();
-			String issue_id = request.getParameter("issue_id");
-			String user_id = request.getParameter("user_id");
-			String comment = request.getParameter("comment");
-
-			   
-			
-			String sql = "INSERT INTO issue_comment(issue_id, commenter_user_name, user_comment) " +
-			"VALUES ('"+issue_id+"', '"+user_id+"','"+comment+"')";
-			
-      stmt.executeUpdate(sql);
-		}
-		catch (NamingException e)
-		{
-			e.printStackTrace();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-				
-		finally
-		{
-			try {
-
-				stmt.close();
-				conn.close();
-				ctx.close();
-				
-
-			}
-			catch (NamingException e)
-			{
-				e.printStackTrace();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-		}}
-		response.sendRedirect(request.getContextPath() + "/itservices?id=issue");
+	public Comment()
+	{
+		this.issueId = "";
+		this.commenterUserName = "";
+		this.userComment = "";
 	}
 	
-	public void doGet(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException
+
+	
+	public void setIssueId(String issueid)
 	{
-		doPost(request, response);
+		this.issueId = issueId;
 	}
+	
+	public void setCommenterUserName(String commenterUserName)
+	{
+		this.commenterUserName = commenterUserName;
+	}
+	
+	public void setUserComment(String userComment)
+	{
+		this.userComment = userComment;
+	}
+		
+	
+	//getters
+
+	
+	public String getIssueId()
+	{
+		return issueId;
+	}
+	
+	public String getCommenterUserName()
+	{
+		return commenterUserName;
+	}
+	
+	public String getUserComment()
+	{
+		return userComment;
+	}
+	
+	
 }
