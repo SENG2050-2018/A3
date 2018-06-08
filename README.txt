@@ -57,6 +57,34 @@ Submission directory structure:
 			+ Login.jsp
 			+ LoginError.jsp
 		+ lib
+			+ mysql-connector-java-5.1.36-bin.jar
+			+ taglibs-standard-impl-1.2.5.jar
+			+ taglibs-standard-spec-1.2.5.jar
 		+ sql
+			+ database.sql
 		+ web.xml
 	+ README.txt
+	
+	
+	
+	
+	
+	
+	
+A Note to the marker:
+	Look im going to be honest with you, to run our web application the URL does NOT conform
+	to the assignment specifications. I realised this too late, and to change our code to run
+	this way would make us run overtime. - Brad Turner
+	OUR URL TO RUN THIS PROJECT IS:
+	http://localhost:8080/c3259038_c3252227_FinalProject/itservices
+	
+	USEFUL LOGIN CREDENTIALS:
+	user_name			|			password			|			role
+	Administrator		|			admin				|		system_admin
+	U080033				|			humperdale			|		public_user
+	U080096				|			feb2015				|		it_staff
+	
+	DIFFERENCE IN ROLES:
+	- public users have access to all public jsps
+	- it staff have access to all public jsps AND can view and modify the issue base
+	- system admins have full access to the website and can create alerts.
