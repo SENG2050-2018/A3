@@ -28,7 +28,6 @@
 				<div class="dropdown-content">
 					<a href="${pageContext.servletContext.contextPath}/itservices?id=issue_base">View Issues</a>
 					<c:if test="${sessionScope.isAdmin == true}" >
-						<a href="${pageContext.servletContext.contextPath}/itservices?id=view_user">Create / Edit Users</a>
 						<a href="${pageContext.servletContext.contextPath}/itservices?id=create_alert">Create New Alerts</a>
 					</c:if>
 				</div>
@@ -54,7 +53,7 @@
 					<form action="itservices?id=issue" method="post">
 						<input type='hidden' name='issue_id' value='${notice.id}' />
 						<input type='hidden' name='src' value='profile' />
-						<button type='submit'><c:out value="${notice.title}" /></button>
+						<button type='submit' style="width:100%;border:0;border-top: solid 1px #2D3138;outline:0;background:white;font-size:14px;padding: 5px 5px;"><c:out value="${notice.title}" /></button>
 					</form>
 				</c:forEach>
 			</div>

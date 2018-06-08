@@ -62,6 +62,7 @@
 							<label for='endTime'>End time of alert: </label><input type='time' name='endTime'>
 						</p>
 					</section>
+					<button type='submit'>Create Alert!</button>
 				</form>
 			</div>
 		</div>

@@ -42,10 +42,11 @@
 						</p>
 					</section>
 					<section>
-						Able to access internal websites: <c:out value="${report.internalAccess}" /> </br>
-						Tried using an alternate browser: <c:out value="${report.altBrowser}" /> </br>
-						Tried restarting my computer: <c:out value="${report.pcRestart}" /> </br> </br>
-					
+						<c:if test="${sessionScope.isStaff == true}" >
+							Able to access internal websites: <c:out value="${report.internalAccess}" /> </br>
+							Tried using an alternate browser: <c:out value="${report.altBrowser}" /> </br>
+							Tried restarting my computer: <c:out value="${report.pcRestart}" /> </br> </br>
+						</c:if>
 						<p>
 							Description: <c:out value="${report.description}" /> 
 						</p>
@@ -53,7 +54,7 @@
 					<section>
 						<p>
 							<b>Resolved: 
-								<c:if test="${report.state == 'resolved' || report.state == 'completed' || report.state == 'knowledgebase'}" >
+								<c:if test="${report.state == 'Resolved' || report.state == 'Completed' || report.state == 'Knowledgebase'}" >
 									<c:out value="${report.resolved}" /> 
 								</c:if>
 							</b>
@@ -70,24 +71,24 @@
 								<input type='hidden' name='issue_id' value='${report.id}'>
 								<input type='hidden' name='src' value='${sessionScope.src}'>
 								
-								<c:if test="${report.state == 'new'}" > 
+								<c:if test="${report.state == 'New'}" > 
 									<input type='hidden' name='flag' value='in-progress'>
 									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Mark In-Progress</button></h4>
 								</c:if>
-								<c:if test="${report.state == 'in-progress'}" > 
+								<c:if test="${report.state == 'In-progress'}" > 
 									<input type='hidden' name='flag' value='completed'>
 									<h4>Admin:</h4>
 									<label for='resolutionDetails'>How to resolve the issue:</label><textarea name='resolutionDetails' style='width:100%;height: 100px;' required></textarea>
 									<h4> <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px'>Mark Completed</button></h4>
 								</c:if>
-								<c:if test="${report.state == 'completed'}" > 
+								<c:if test="${report.state == 'Completed'}" > 
 									<h4>Admin: Marked complete. Waiting on reporter.</h4>
 								</c:if>
-								<c:if test="${report.state == 'resolved'}" > 
+								<c:if test="${report.state == 'Resolved'}" > 
 									<input type='hidden' name='flag' value='knowledgebase'>
 									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px' >Mark KnowledgeBase</button></h4>
 								</c:if>
-								<c:if test="${report.state == 'knowledgebase'}" > 
+								<c:if test="${report.state == 'Knowledgebase'}" > 
 									<input type='hidden' name='flag' value='resolved'>
 									<h4>Admin: <button type='submit' class='mimicBtn' style='font-size: var(--stdFont); max-width: 300px' >Remove from KnowledgeBase</button></h4>
 								</c:if>
@@ -97,7 +98,7 @@
 					
 					<!-- Section for user who reported the issue to accelerate the workflow -->
 					<c:if test="${report.reporter == user.userName}" >
-						<c:if test="${report.state == 'completed'}" > 
+						<c:if test="${report.state == 'Completed'}" > 
 							<section>
 								<form action="itservices?id=issue" method="post">
 									<input type='hidden' name='issue_id' value='${report.id}'>
@@ -124,7 +125,7 @@
 								</div>
 							</c:forEach>
 						</c:if>
-						<c:if test="${!(report.state == 'resolved' || report.state == 'knowledgebase')}" >
+						<c:if test="${!(report.state == 'Resolved' || report.state == 'Knowledgebase')}" >
 							<h2> Add Comment </h2>
 							<form action="itservices?id=issue" method="post">
 								<input type='hidden' name='issue_id' value='${report.id}' />

@@ -56,7 +56,15 @@
 					<ul class='alerts grid links'>
 						<c:forEach var='alert' items='${alerts}'>
 							<li class='cellSpan'>
-								<h2><c:out value="${alert.title}" /></h2>
+								<h2>
+									<form action="itservices?id=remove_alert" method="post">
+										<c:out value="${alert.title}" />
+										<c:if test="${sessionScope.isAdmin == true}">
+											<input type="hidden" name="alert_id" value="${alert.id}" >
+											<button type='submit' class='mimicBtn' style='max-width:120px;float:right;color:white;font-size:var(--stdFont);'>Remove Alert</button>
+										</c:if>
+									</form>
+								</h2>
 								<p><c:out value="${alert.description}" /></p>
 							</li>
 						</c:forEach>	
